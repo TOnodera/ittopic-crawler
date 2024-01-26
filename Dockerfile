@@ -1,4 +1,4 @@
-FROM apify/actor-node-playwright-chrome:16
+FROM apify/actor-node-playwright-chrome:18
 
 USER root
 RUN apt-get update \
@@ -20,7 +20,7 @@ RUN apt-get update \
 RUN sed -i -e 's/# \(ja_JP.UTF-8\)/\1/' /etc/locale.gen \
     && locale-gen \
     && update-locale LANG=ja_JP.UTF-8
-
+    
 # node, npm, npxを使えるようにする
 # RUN wget https://nodejs.org/dist/v20.11.0/node-v20.11.0-linux-x64.tar.xz \
 #     && tar xfv node-v20.11.0-linux-x64.tar.xz \
