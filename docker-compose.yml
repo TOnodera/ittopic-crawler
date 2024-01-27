@@ -4,6 +4,16 @@ services:
     build: ./app
   db:
     build: ./postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: crawler
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+  db_test:
+    build: ./postgres
+    ports:
+      - 4321:5432
     environment:
       POSTGRES_DB: crawler
       POSTGRES_USER: postgres

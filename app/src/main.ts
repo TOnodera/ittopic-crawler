@@ -8,7 +8,7 @@ log.setLevel(log.LEVELS.DEBUG);
 const results = await Promise.all([await qiitaLauncher()]);
 
 for (const result of results) {
-    if (0 < result.requestsFailed) {
-        // 通知
-    }
+  if (0 < result.requestsFailed) {
+    // 通知
+  }
 }
