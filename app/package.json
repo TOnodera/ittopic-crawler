@@ -30,7 +30,7 @@
     "start:prod": "node dist/main.js",
     "start:dev": "tsx src/main.ts",
     "build": "tsc",
-    "seed": "tsx prisma/seeders/siteSeeder.ts",
+    "seed": "tsx prisma/seeders/seeders.ts",
     "test": "DATABASE_URL='postgresql://postgres:password@db_test:5432/crawler?schema=public' npx prisma migrate reset --force && DATABASE_URL='postgresql://postgres:password@db_test:5432/crawler?schema=public' npm run seed  && DATABASE_URL='postgresql://postgres:password@db_test:5432/crawler?schema=public' jest"
   },
   "author": "It's not you it's me",

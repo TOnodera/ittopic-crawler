@@ -27,7 +27,7 @@ CREATE TABLE "Article" (
     "title" VARCHAR(255) NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "content_hash" TEXT NOT NULL,
+    "contentHash" TEXT NOT NULL,
     "published" BOOLEAN NOT NULL DEFAULT false,
     "siteId" INTEGER NOT NULL,
 

@@ -8,7 +8,9 @@
         "noUnusedLocals": false,
         "lib": [
             "DOM"
-        ]
+        ],
+        "baseUrl": "./",
+        "paths": {"@/*" : ["src/*"]}
     },
     "include": [
         "./src/**/*"

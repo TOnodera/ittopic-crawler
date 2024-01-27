@@ -1,24 +1,12 @@
 import { PrismaClient } from '@prisma/client';
-import * as config from '../../src/config.js';
-import { logger } from '../../src/utils.js';
+import * as config from '@/config.js';
+import { logger } from '@/utils.js';
 
-const prisma = new PrismaClient();
-
-const seeder = async () => {
-  await prisma.site.deleteMany();
+export const siteSeeder = async (client: PrismaClient) => {
+  await client.site.deleteMany();
   for (const data of config.SITES) {
     logger.debug(data);
-    await prisma.site.create({ data });
+    await client.site.create({ data });
   }
+  logger.info('Siteマスタのシーディングが完了しました');
 };
-
-seeder()
-  .then(() => {
-    logger.info('siteマスタのシーディングが完了しました');
-  })
-  .catch(() => {
-    logger.error('siteマスタのシーディングに失敗しました');
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
