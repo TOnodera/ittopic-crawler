@@ -1,9 +1,8 @@
 import { PrismaClient } from '@prisma/client';
-import internal from 'stream';
 
 export interface NewArticle {
-  id: number;
   title: string;
+  siteId: number;
   content_hash: string;
 }
 export interface Article {
@@ -16,10 +15,11 @@ export interface Article {
   updatedAt: Date;
 }
 
-export const createArticle = async (client: PrismaClient, data: Article) => {
-  await client.article.create({
+export const createArticle = async (client: PrismaClient, data: NewArticle) => {
+  const test =await client.article.create({
     data,
   });
+  console.log(test)
 };
 
 export const getArticle = async (client: PrismaClient, id: number): Promise<Article | null> => {
