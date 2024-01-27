@@ -31,7 +31,7 @@ RUN sed -i -e 's/# \(ja_JP.UTF-8\)/\1/' /etc/locale.gen \
 # 開発時に利用するユーザー
 ARG userid=1000
 RUN usermod -s /bin/bash -u ${userid} node
-WORKDIR /home/node/app
-RUN chown -R ${userid}:${userid} /home/node/app
+WORKDIR /home/node/crawler
+RUN chown -R ${userid}:${userid} /home/node/
 
 USER node
