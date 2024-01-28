@@ -1,7 +1,7 @@
 // For more information, see https://crawlee.dev/
 import { log } from 'crawlee';
-import { qiitaLauncher } from './crawlers/qiita/crawler.js';
-import { classmethodLauncher } from './crawlers/classmethod/crawler.js';
+import { qiitaLauncher } from './crawlers/qiita/qiitaCrawler.js';
+import { classmethodLauncher } from './crawlers/classmethod/classmethodCrawler.js';
 
 log.setLevel(log.LEVELS.DEBUG);
 
