@@ -8,13 +8,15 @@ export enum SITE {
   CLASSMETHOD = 2,
 }
 
-export const SITES = [
-  {
+export const SITES = {
+  [SITE.QIITA]: {
     id: SITE.QIITA,
     name: SITE[SITE.QIITA],
+    urls: ['https://qiita.com/'],
   },
-  {
+  [SITE.CLASSMETHOD]: {
     id: SITE.CLASSMETHOD,
     name: SITE[SITE.CLASSMETHOD],
+    urls: ['https://dev.classmethod.jp/'],
   },
-];
+};

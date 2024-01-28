@@ -4,9 +4,9 @@ import { logger } from '@/utils.js';
 
 export const siteSeeder = async (client: PrismaClient) => {
   await client.site.deleteMany();
-  for (const data of config.SITES) {
-    logger.debug(data);
-    await client.site.create({ data });
+  for (const key in config.SITES) {
+    const data = config.SITES[key];
+    await client.site.create({ data: { id: data.id, name: data.name } });
   }
   logger.info('Siteマスタのシーディングが完了しました');
 };
