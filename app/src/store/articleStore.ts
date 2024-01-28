@@ -1,4 +1,4 @@
-import { SITE } from 'src/config.js';
+import { SITE } from '@/config.js';
 import { PrismaClient } from '@prisma/client';
 
 export interface NewArticle {

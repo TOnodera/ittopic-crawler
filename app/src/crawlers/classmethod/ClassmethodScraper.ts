@@ -1,9 +1,9 @@
-import { NewArticle } from 'src/store/articleStore.js';
+import { NewArticle } from '@/store/articleStore.js';
 import { Request, Dictionary } from 'crawlee';
 import { Page } from 'playwright';
 import { Scraper } from '../Scraper.js';
 import { createHash } from 'crypto';
-import { SITE } from 'src/config.js';
+import { SITE } from '@/config.js';
 
 export class ClassmethodScraper implements Scraper {
   async getPageData(request: Request<Dictionary>, page: Page, siteId: SITE): Promise<NewArticle> {

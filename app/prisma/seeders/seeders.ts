@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { siteSeeder } from './siteSeeder.js';
-import { logger } from 'src/utils.js';
+import { logger } from '@/utils.js';
 
 const client = new PrismaClient();
 

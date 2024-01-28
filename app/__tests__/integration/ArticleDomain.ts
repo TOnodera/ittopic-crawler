@@ -1,8 +1,8 @@
 import { test, describe, expect } from '@jest/globals';
-import { ArticleDomain } from 'src/domain/ArticleDomain.js';
-import { ArticleStore, NewArticle } from 'src/store/articleStore.js';
+import { ArticleDomain } from '../../src/domain/ArticleDomain.js';
+import { ArticleStore, NewArticle } from '../../src/store/articleStore.js';
 import { PrismaClient } from '@prisma/client';
-import { SITE } from 'src/config.js';
+import { SITE } from '../../src/config.js';
 
 const client = new PrismaClient();
 const store = new ArticleStore(client);
