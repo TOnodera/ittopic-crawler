@@ -9,7 +9,7 @@ import { logger } from '../utils.js';
  *
  * 簡単なロジックだけど一応バリデーションは入れる
  */
-export default class SaveArticle {
+class ArticleDomain {
   private store: ArticleStore;
   private siteId: SITE;
   constructor(store: ArticleStore, siteId: SITE) {
@@ -58,3 +58,5 @@ export default class SaveArticle {
     return true;
   }
 }
+
+export { ArticleDomain };

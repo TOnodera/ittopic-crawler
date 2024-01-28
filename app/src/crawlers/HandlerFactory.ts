@@ -1,14 +1,24 @@
 import { Scraper } from './Scraper.js';
-import { ArticleStore } from '@/store/articleStore.js';
 import { createPlaywrightRouter } from 'crawlee';
-import { SITE } from '@/config.js';
-import SaveArticle from '@/domain/SaveArticle.js';
+import { SITE } from 'src/config.js';
+import { ArticleDomain } from 'src/domain/ArticleDomain.js';
 
-export default class HandlerFactory {
+/**
+ * crawleeに登録する詳細ページに入った後のハンドラをここで登録する
+ *
+ * 基本ロジックはどのサイトでも
+ * ・一覧ページに掲載されている記事のURLを取得
+ * ・詳細ページのURLとタイトル・本文などを保存
+ * という流れになる。
+ *
+ * なのでベースになる抽象ロジックを記載して、詳細なロジックはDIする。
+ * Scraperはサイトごとのデータの取得方法、ArticleDomainは登録方法についてのビジネスロジックが書かれている。
+ */
+export class HandlerFactory {
   private scraper: Scraper;
   private siteId: SITE;
-  private domain: SaveArticle;
-  constructor(scraper: Scraper, siteId: SITE, domain: SaveArticle) {
+  private domain: ArticleDomain;
+  constructor(scraper: Scraper, siteId: SITE, domain: ArticleDomain) {
     this.scraper = scraper;
     this.siteId = siteId;
     this.domain = domain;
@@ -25,7 +35,7 @@ export default class HandlerFactory {
     requestHandler.addDefaultHandler(async ({ enqueueLinks }) => {
       const result = await enqueueLinks({ selector: this.scraper.getSelector(), label: 'ARTICLE' });
       if (0 < result.unprocessedRequests.length) {
-        // 指定したセレクタでデータが取得できない場合はhtml構造が変化した可能性があるので通知処理を行う
+        // TODO 指定したセレクタでデータが取得できない場合はhtml構造が変化した可能性があるので通知処理を行う
       }
     });
     return requestHandler;

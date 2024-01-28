@@ -1,15 +1,15 @@
 import { PlaywrightCrawler, createPlaywrightRouter } from 'crawlee';
-import { SITES, SITE } from '@/config.js';
-import { getPrismaClient } from '@/store/prismaClient.js';
-import { ArticleStore } from '@/store/articleStore.js';
-import QiitaScraper from './QiitaScraper.js';
-import HandlerFactory from '@/crawlers/HandlerFactory.js';
-import SaveArticle from '@/domain/SaveArticle.js';
+import { SITES, SITE } from 'src/config.js';
+import { getPrismaClient } from 'src/store/prismaClient.js';
+import { ArticleStore } from 'src/store/articleStore.js';
+import { QiitaScraper } from './QiitaScraper.js';
+import { HandlerFactory } from 'src/crawlers/HandlerFactory.js';
+import { ArticleDomain } from 'src/domain/ArticleDomain.js';
 
 const client = getPrismaClient();
 const store = new ArticleStore(client);
 const scraper = new QiitaScraper();
-const domain = new SaveArticle(store, SITE.QIITA);
+const domain = new ArticleDomain(store, SITE.QIITA);
 const factory = new HandlerFactory(scraper, SITE.QIITA, domain);
 
 export const qiitaLauncher = async () => {

@@ -10,9 +10,10 @@
             "DOM"
         ],
         "baseUrl": "./",
-        "paths": {"@/*" : ["src/*"]}
+        "paths": {"src/*" : ["src/*"]}
     },
     "include": [
         "./src/**/*"
-, "prisma/seeders"    ]
+        ,"__tests__"    
+    ]
 }
