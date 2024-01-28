@@ -8,7 +8,7 @@ export enum SITE {
   CLASSMETHOD = 2,
 }
 
-export const SITES = {
+export const SITES: { [key: number]: { id: SITE; name: string; urls: string[] } } = {
   [SITE.QIITA]: {
     id: SITE.QIITA,
     name: SITE[SITE.QIITA],

@@ -13,9 +13,6 @@ export class ClassmethodScraper implements Scraper {
       .locator('div.main > .content')
       .first()
       .textContent()) as string as string;
-    const contentHash = createHash('md5')
-      .update(content as string)
-      .digest('hex');
     const url = request.url;
     const contentId = url.split('/').slice(-2)[0] as string;
     console.error(contentId);
@@ -23,7 +20,7 @@ export class ClassmethodScraper implements Scraper {
       title,
       siteId,
       content,
-      contentHash,
+      contentHash: '',
       contentId,
       url,
     };

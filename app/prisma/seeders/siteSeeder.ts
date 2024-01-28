@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import * as config from '@/config.js';
-import { logger } from '@/utils.js';
+import { logger } from '@/utils/logger.js';
 
 export const siteSeeder = async (client: PrismaClient) => {
   await client.site.deleteMany();

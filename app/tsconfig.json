@@ -3,7 +3,8 @@
     "compilerOptions": {
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
-        "target": "ES2022",
+        "moduleDetection": "auto",
+        "target": "ESNext",
         "outDir": "dist",
         "noUnusedLocals": false,
         "lib": [
@@ -12,8 +13,4 @@
         "baseUrl": "./",
         "paths": {"@/*" : ["src/*"]}
     },
-    "include": [
-        "./src/**/*"
-        ,"__tests__"    
-    ]
 }

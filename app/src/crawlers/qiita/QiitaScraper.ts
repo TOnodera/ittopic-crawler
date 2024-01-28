@@ -10,7 +10,6 @@ export class QiitaScraper implements Scraper {
     // データ取得部
     const title = await page.title();
     const content = (await page.locator('.style-itrjxe').first().textContent()) as string;
-    const contentHash = createHash('md5').update(content).digest('hex');
     const url = request.url;
     const contentId = url.split('/').pop() as string;
 
@@ -18,7 +17,7 @@ export class QiitaScraper implements Scraper {
       title,
       siteId,
       content,
-      contentHash,
+      contentHash: '',
       contentId,
       url,
     };

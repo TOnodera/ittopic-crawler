@@ -1,6 +1,6 @@
 import { test, describe, expect } from '@jest/globals';
-import { SITE } from '../../../src/config.js';
-import { ArticleStore } from '../../../src/store/articleStore.js';
+import { SITE } from '@/config.js';
+import { ArticleStore } from '@/store/articleStore.js';
 import { PrismaClient } from '@prisma/client';
 
 const client = new PrismaClient();

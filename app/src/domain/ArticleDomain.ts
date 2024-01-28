@@ -1,6 +1,7 @@
-import { SITE } from '../config.js';
-import { ArticleStore, NewArticle } from '../store/articleStore.js';
-import { logger } from '../utils.js';
+import { ArticleStore, NewArticle } from '@/store/articleStore.js';
+import { logger } from '@/utils/logger.js';
+import { SITE } from '@/config.js';
+import { makeHashFromString } from '@/utils/makeHash.js';
 
 /**
  * このアプリケーションのメインロジックを実装
@@ -43,14 +44,18 @@ class ArticleDomain {
     // データが存在しない場合は新規登録
     const oldArticle = await this.store.getArticleByContentId(this.siteId, data.contentId);
     if (!oldArticle) {
-      await this.store.createArticle(data);
+      await this.store.createArticle({ ...data, contentHash: makeHashFromString(data.content) });
       logger.info(`${SITE[this.siteId]} title: ${data.title} を登録しました`);
     }
     // データは存在するが、ハッシュ値が登録済みデータと一致しない場合はデータが更新されたとみなしてDBも更新する
     // 実装したけどこのパターンは多分あんまないと思う
     else {
       if (oldArticle.contentHash != data.contentHash) {
-        await this.store.updateArticle({ ...oldArticle, ...data });
+        await this.store.updateArticle({
+          ...oldArticle,
+          content: data.content,
+          contentHash: makeHashFromString(data.content),
+        });
         logger.info(`${SITE[this.siteId]} title: ${data.title} を更新しました`);
       }
     }

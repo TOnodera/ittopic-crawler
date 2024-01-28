@@ -91,9 +91,11 @@ const config: Config = {
   // ],
 
   // A map from regular expressions to module names or to arrays of module names that allow to stub out resources with a single module
-  // moduleNameMapper: {
-  //   '^src/(.+)': '<rootDir>/src/$1',
-  // },
+  moduleNameMapper: {
+    //   '^src/(.+)': '<rootDir>/src/$1',
+    '^(\\.{1,2}/.*)\\.js$': '$1',
+    '^@/(.*)\\.js': '<rootDir>/src/$1', // これが必要だった！！
+  },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
   // modulePathIgnorePatterns: [],
@@ -180,7 +182,7 @@ const config: Config = {
   // A map from regular expressions to paths to transformers
   // transform: undefined,
   transform: {
-    '^.+\\.(ts|tsx)$': 'ts-jest',
+    '^.+\\.(ts|tsx)$': ['ts-jest', { useEsm: true }],
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation

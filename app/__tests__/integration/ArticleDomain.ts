@@ -1,9 +1,10 @@
 import { test, describe, expect } from '@jest/globals';
-import { ArticleDomain } from '../../src/domain/ArticleDomain.js';
-import { ArticleStore, NewArticle } from '../../src/store/articleStore.js';
+import { ArticleDomain } from '@/domain/ArticleDomain.js';
+import { ArticleStore, NewArticle } from '@/store/articleStore.js';
 import { PrismaClient } from '@prisma/client';
-import { SITE } from '../../src/config.js';
+import { SITE } from '@/config.js';
 
+test('hoge', () => {});
 const client = new PrismaClient();
 const store = new ArticleStore(client);
 const article = {
@@ -30,8 +31,11 @@ describe('ArticleDomainのテスト', () => {
   test('既存データがある場合は更新', async () => {
     const domain = new ArticleDomain(store, SITE.QIITA);
     const updatedContent = 'content2';
-    expect(await domain.save({ ...article, content: updatedContent })).toBeTruthy();
-    const oldArticle = await store.getArticle(1);
-    expect(oldArticle?.title).toBe(updatedContent);
+    const updatingArticle = { ...article, content: updatedContent };
+    console.error(updatingArticle);
+    expect(await domain.save(updatingArticle)).toBeTruthy();
+    const oldArticle = await store.getArticle(2);
+    console.debug(oldArticle);
+    expect(oldArticle?.content).toBe(updatedContent);
   });
 });
