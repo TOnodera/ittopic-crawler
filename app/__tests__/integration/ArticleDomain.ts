@@ -3,8 +3,8 @@ import { ArticleDomain } from '@/domain/ArticleDomain.js';
 import { ArticleStore, NewArticle } from '@/store/articleStore.js';
 import { PrismaClient } from '@prisma/client';
 import { SITE } from '@/config.js';
+import { resetAndSeedDatabase } from '../utility.js';
 
-test('hoge', () => {});
 const client = new PrismaClient();
 const store = new ArticleStore(client);
 const article = {
@@ -16,6 +16,9 @@ const article = {
   siteId: SITE.QIITA,
 } as NewArticle;
 describe('ArticleDomainのテスト', () => {
+  beforeAll(async () => {
+    return await resetAndSeedDatabase(client);
+  });
   test('タイトルがない場合はfalse', async () => {
     const domain = new ArticleDomain(store, SITE.QIITA);
     expect(await domain.save({ ...article, title: ' ' })).toBeFalsy();
@@ -32,10 +35,8 @@ describe('ArticleDomainのテスト', () => {
     const domain = new ArticleDomain(store, SITE.QIITA);
     const updatedContent = 'content2';
     const updatingArticle = { ...article, content: updatedContent };
-    console.error(updatingArticle);
     expect(await domain.save(updatingArticle)).toBeTruthy();
-    const oldArticle = await store.getArticle(2);
-    console.debug(oldArticle);
+    const oldArticle = await store.getArticle(1);
     expect(oldArticle?.content).toBe(updatedContent);
   });
 });

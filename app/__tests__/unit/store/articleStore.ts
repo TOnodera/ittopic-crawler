@@ -2,6 +2,7 @@ import { test, describe, expect } from '@jest/globals';
 import { SITE } from '@/config.js';
 import { ArticleStore } from '@/store/articleStore.js';
 import { PrismaClient } from '@prisma/client';
+import { resetAndSeedDatabase } from '../../utility.js';
 
 const client = new PrismaClient();
 const store = new ArticleStore(client);
@@ -15,6 +16,9 @@ const fixture = {
 };
 
 describe('articleStoreのテスト', () => {
+  beforeAll(async () => {
+    return await resetAndSeedDatabase(client);
+  });
   test('記事データの登録ができること', async () => {
     await store.createArticle(fixture);
   });

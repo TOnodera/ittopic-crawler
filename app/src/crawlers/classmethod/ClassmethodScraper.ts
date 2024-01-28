@@ -2,7 +2,6 @@ import { NewArticle } from '@/store/articleStore.js';
 import { Request, Dictionary } from 'crawlee';
 import { Page } from 'playwright';
 import { Scraper } from '../Scraper.js';
-import { createHash } from 'crypto';
 import { SITE } from '@/config.js';
 
 export class ClassmethodScraper implements Scraper {
@@ -15,7 +14,6 @@ export class ClassmethodScraper implements Scraper {
       .textContent()) as string as string;
     const url = request.url;
     const contentId = url.split('/').slice(-2)[0] as string;
-    console.error(contentId);
     return {
       title,
       siteId,

@@ -4,11 +4,11 @@ import { logger } from '@/utils/logger.js';
 
 const client = new PrismaClient();
 
-const run = async (client: PrismaClient) => {
-  await Promise.all([siteSeeder(client)]);
+export const runSeed = async (client: PrismaClient) => {
+  return await Promise.all([siteSeeder(client)]);
 };
 
-run(client)
+runSeed(client)
   .then(() => {
     logger.info('シーディングが完了しました');
   })
