@@ -4,6 +4,7 @@ import { PrismaClient } from '@prisma/client';
 export interface NewArticle {
   title: string;
   siteId: number;
+  content: string;
   contentHash: string;
   url: string;
   contentId: string;
@@ -12,6 +13,7 @@ export interface NewArticle {
 export interface Article {
   id: number;
   title: string;
+  content: string;
   contentHash: string;
   published: boolean;
   siteId: number;

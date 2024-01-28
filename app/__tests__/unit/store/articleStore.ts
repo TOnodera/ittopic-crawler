@@ -1,12 +1,13 @@
 import { test, describe, expect } from '@jest/globals';
-import { SITE } from '../../src/config';
-import { ArticleStore } from '../../src/store/articleStore';
+import { SITE } from '../../../src/config';
+import { ArticleStore } from '../../../src/store/articleStore';
 import { PrismaClient } from '@prisma/client';
 
 const client = new PrismaClient();
 const store = new ArticleStore(client);
 const fixture = {
   title: 'test1',
+  content: 'content',
   contentHash: 'hash',
   contentId: 'ad9fa9234',
   url: 'https://example.com',

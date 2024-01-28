@@ -15,6 +15,7 @@ model Article {
   siteId      Int // サイトマスタのID
   contentId   String // 対象サイトで割り振られている記事のID
   title       String //記事のタイトル
+  content     String // 記事の内容
   contentHash String // 記事の内容のhash値
   published   Boolean  @default(false) //公開フラグ
   Site        Site     @relation(fields: [siteId], references: [id]) // サイトマスタとのリレーション定義

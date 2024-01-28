@@ -4,11 +4,13 @@ import { getPrismaClient } from '@/store/prismaClient.js';
 import { ArticleStore } from '@/store/articleStore.js';
 import QiitaScraper from './QiitaScraper.js';
 import HandlerFactory from '@/crawlers/HandlerFactory.js';
+import SaveArticle from '@/domain/SaveArticle.js';
 
 const client = getPrismaClient();
 const store = new ArticleStore(client);
 const scraper = new QiitaScraper();
-const factory = new HandlerFactory(store, scraper, SITE.QIITA);
+const domain = new SaveArticle(store, SITE.QIITA);
+const factory = new HandlerFactory(scraper, SITE.QIITA, domain);
 
 export const qiitaLauncher = async () => {
   const urls = SITES[SITE.QIITA].urls;

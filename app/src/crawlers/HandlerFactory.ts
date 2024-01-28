@@ -1,18 +1,17 @@
-import { Scraper } from './scraper.js';
+import { Scraper } from './Scraper.js';
 import { ArticleStore } from '@/store/articleStore.js';
-import { Request, createPlaywrightRouter } from 'crawlee';
-import { Page } from 'playwright';
+import { createPlaywrightRouter } from 'crawlee';
 import { SITE } from '@/config.js';
-import { logger } from '@/utils.js';
+import SaveArticle from '@/domain/SaveArticle.js';
 
 export default class HandlerFactory {
-  private articleStore: ArticleStore;
   private scraper: Scraper;
   private siteId: SITE;
-  constructor(articleStore: ArticleStore, scraper: Scraper, siteId: SITE) {
-    this.articleStore = articleStore;
+  private domain: SaveArticle;
+  constructor(scraper: Scraper, siteId: SITE, domain: SaveArticle) {
     this.scraper = scraper;
     this.siteId = siteId;
+    this.domain = domain;
   }
 
   get = async () => {
@@ -20,22 +19,7 @@ export default class HandlerFactory {
     // 詳細ページのハンドラ
     requestHandler.addHandler('ARTICLE', async ({ request, page }): Promise<void> => {
       const data = await this.scraper.getPageData(request, page, this.siteId);
-      /**
-       * データ登録部
-       */
-      // データが存在しない場合は新規登録
-      const oldArticle = await this.articleStore.getArticleByContentId(this.siteId, data.contentId);
-      if (!oldArticle) {
-        await this.articleStore.createArticle(data);
-        logger.info(`${SITE[this.siteId]} title: ${data.title} を登録しました`);
-      }
-      // データは存在するが、ハッシュ値が登録済みデータと一致しない場合はデータが更新されたとみなしてDBも更新する
-      else {
-        if (oldArticle.contentHash != data.contentHash) {
-          await this.articleStore.updateArticle({ ...oldArticle, ...data });
-          logger.info(`${SITE[this.siteId]} title: ${data.title} を更新しました`);
-        }
-      }
+      await this.domain.save(data);
     });
     // enqueueLinksのセレクタに一覧ページに表示されている取得したい記事のリンクのセレクタを入れる
     requestHandler.addDefaultHandler(async ({ enqueueLinks }) => {

@@ -3,13 +3,7 @@ import { log } from 'crawlee';
 import { qiitaLauncher } from './crawlers/qiita/qiitaCrawler.js';
 import { classmethodLauncher } from './crawlers/classmethod/classmethodCrawler.js';
 
-log.setLevel(log.LEVELS.DEBUG);
-
-// Add first URL to the queue and start the crawl.
-const results = await Promise.all([await qiitaLauncher(), await classmethodLauncher()]);
-
-for (const result of results) {
-  if (0 < result.requestsFailed) {
-    // 通知
-  }
-}
+log.setLevel(log.LEVELS.INFO);
+// 並列化したいけどcrawlee側でまだ未対応（experimental)だったので辞めとく
+await qiitaLauncher();
+await classmethodLauncher();

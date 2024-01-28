@@ -1,5 +1,3 @@
-import pino from 'pino';
+import { Log } from 'crawlee';
 
-export const logger = pino.pino({
-  level: 'debug',
-});
+export const logger = new Log();
