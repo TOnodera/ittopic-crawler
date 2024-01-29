@@ -6,6 +6,7 @@ export interface Site {
 export enum SITE {
   QIITA = 1,
   CLASSMETHOD = 2,
+  CYBOZUSHIKI = 3,
 }
 
 export const SITES: { [key: number]: { id: SITE; name: string; urls: string[] } } = {
@@ -18,5 +19,10 @@ export const SITES: { [key: number]: { id: SITE; name: string; urls: string[] } 
     id: SITE.CLASSMETHOD,
     name: SITE[SITE.CLASSMETHOD],
     urls: ['https://dev.classmethod.jp/'],
+  },
+  [SITE.CYBOZUSHIKI]: {
+    id: SITE.CYBOZUSHIKI,
+    name: SITE[SITE.CYBOZUSHIKI],
+    urls: ['https://cybozushiki.cybozu.co.jp/'],
   },
 };
