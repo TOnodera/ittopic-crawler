@@ -3,7 +3,7 @@ import { ArticleDomain } from '@/domain/ArticleDomain.js';
 import { ArticleStore, NewArticle } from '@/store/articleStore.js';
 import { PrismaClient } from '@prisma/client';
 import { SITE } from '@/config.js';
-import { resetAndSeedDatabase } from '../utility.js';
+import { resetAndSeedDatabase } from '../settings/utility.js';
 
 const client = new PrismaClient();
 const store = new ArticleStore(client);

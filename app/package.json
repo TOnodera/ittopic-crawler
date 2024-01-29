@@ -30,8 +30,10 @@
     "start:prod": "node dist/main.js",
     "start:dev": "tsx src/main.ts",
     "build": "tsc",
-    "seed": "tsx prisma/seeders/seeders.ts",
-    "test": "jest --runInBand"
+    "db:seed": "tsx prisma/seeders/run.ts",
+    "db:reset": "prisma migrate reset --force",
+    "db.test:reset": "DATABASE_URL=postgresql://postgres:password@db_test:5432/crawler?schema=public prisma migrate reset --force",
+    "test": "npm run db.test:reset && jest --runInBand"
   },
   "author": "It's not you it's me",
   "license": "ISC"
