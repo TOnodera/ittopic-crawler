@@ -5,8 +5,21 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Start Crawler",
+            "request": "launch",
+            "runtimeArgs": [
+                "start"
+            ],
+            "cwd": "${workspaceFolder}/app",
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
             "type": "node",
-            "name": "vscode-jest-tests.v2",
+            "name": "Start Jest",
             "request": "launch",
             "args": [
                 "--runInBand",
@@ -20,19 +33,6 @@
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "program": "${workspaceFolder}/app/node_modules/.bin/jest",
-        },
-        {
-            "name": "Start",
-            "request": "launch",
-            "runtimeArgs": [
-                "start"
-            ],
-            "cwd": "${workspaceFolder}/app",
-            "runtimeExecutable": "npm",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "type": "node"
         }
     ]
 }

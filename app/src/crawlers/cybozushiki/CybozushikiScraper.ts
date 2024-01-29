@@ -22,6 +22,6 @@ export class CybozushikiScraper implements Scraper {
     };
   }
   getSelector() {
-    return 'dif.top-news__article div.m-card-v__inner > a';
+    return 'div.top-news__article div.m-card-v__inner > a';
   }
 }

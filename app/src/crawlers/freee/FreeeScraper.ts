@@ -4,11 +4,11 @@ import { Page } from 'playwright';
 import { Scraper } from '../Scraper.js';
 import { SITE } from '@/config.js';
 
-export class QiitaScraper implements Scraper {
+export class FreeeScraper implements Scraper {
   async getPageData(request: Request<Dictionary>, page: Page, siteId: SITE): Promise<NewArticle> {
     // データ取得部
     const title = await page.title();
-    const content = (await page.locator('.style-itrjxe').first().textContent()) as string;
+    const content = (await page.locator('div.entry-content').first().textContent()) as string;
     const url = request.url;
     const contentId = url.split('/').pop() as string;
 
@@ -22,6 +22,6 @@ export class QiitaScraper implements Scraper {
     };
   }
   getSelector() {
-    return 'article.style-l2axsx > a';
+    return 'ul.recent-entries li.urllist-item div.urllist-item-inner > a';
   }
 }

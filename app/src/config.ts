@@ -7,6 +7,8 @@ export enum SITE {
   QIITA = 1,
   CLASSMETHOD = 2,
   CYBOZUSHIKI = 3,
+  SONICGARDEN = 4,
+  FREEE = 5,
 }
 
 export const SITES: { [key: number]: { id: SITE; name: string; urls: string[] } } = {
@@ -24,5 +26,15 @@ export const SITES: { [key: number]: { id: SITE; name: string; urls: string[] } 
     id: SITE.CYBOZUSHIKI,
     name: SITE[SITE.CYBOZUSHIKI],
     urls: ['https://cybozushiki.cybozu.co.jp/'],
+  },
+  [SITE.SONICGARDEN]: {
+    id: SITE.SONICGARDEN,
+    name: SITE[SITE.SONICGARDEN],
+    urls: ['https://kuranuki.sonicgarden.jp/'],
+  },
+  [SITE.FREEE]: {
+    id: SITE.FREEE,
+    name: SITE[SITE.FREEE],
+    urls: ['https://developers.freee.co.jp/'],
   },
 };

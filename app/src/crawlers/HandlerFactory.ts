@@ -2,6 +2,7 @@ import { Scraper } from './Scraper.js';
 import { createPlaywrightRouter } from 'crawlee';
 import { SITE } from '@/config.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
+import { logger } from '@/utils/logger.js';
 
 /**
  * crawleeに登録する詳細ページに入った後のハンドラをここで登録する
