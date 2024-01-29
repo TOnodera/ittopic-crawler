@@ -1,20 +1,21 @@
 import { PlaywrightCrawler, createPlaywrightRouter } from 'crawlee';
 import { SITES, SITE } from '@/config.js';
 import { getPrismaClient } from '@/store/prismaClient.js';
-import { ArticleStore } from '@/store/articleStore.js';
+import { ArticleStore } from '@/store/ArticleStore.js';
 import { CybozushikiScraper } from './CybozushikiScraper.js';
 import { HandlerFactory } from '@/crawlers/HandlerFactory.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
 
-const client = getPrismaClient();
-const store = new ArticleStore(client);
-const scraper = new CybozushikiScraper();
-const domain = new ArticleDomain(store, SITE.CYBOZUSHIKI);
-const factory = new HandlerFactory(scraper, SITE.CYBOZUSHIKI, domain);
+export const cybozushikiLauncher = async (siteId: SITE) => {
+  const client = getPrismaClient();
+  const store = new ArticleStore(client);
+  const scraper = new CybozushikiScraper();
+  const domain = new ArticleDomain(store, siteId);
+  const factory = new HandlerFactory(scraper, siteId, domain);
 
-export const cybozushikiLauncher = async () => {
-  const urls = SITES[SITE.CYBOZUSHIKI].urls;
+  const urls = SITES[siteId].urls;
   const requestHandler = await factory.get();
   const cybosushikiCrawler = new PlaywrightCrawler({ requestHandler });
-  return await cybosushikiCrawler.run(urls);
+  const result = await cybosushikiCrawler.run(urls);
+  return { ...result, siteId };
 };

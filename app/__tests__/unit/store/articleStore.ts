@@ -1,6 +1,6 @@
 import { test, describe, expect } from '@jest/globals';
 import { SITE } from '@/config.js';
-import { ArticleStore } from '@/store/articleStore.js';
+import { ArticleStore } from '@/store/ArticleStore.js';
 import { PrismaClient } from '@prisma/client';
 import { resetAndSeedDatabase } from '../../settings/utility.js';
 

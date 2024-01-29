@@ -25,9 +25,28 @@ model Article {
 }
 
 model Site {
-  id        Int       @id @default(autoincrement())
-  name      String    @db.VarChar(255)
-  createdAt DateTime  @default(now()) @db.Timestamp(6)
-  updatedAt DateTime  @default(now()) @db.Timestamp(6)
-  Article   Article[]
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  Article      Article[]
+  CrawlerStats CrawlerStats[]
+  createdAt    DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime       @default(now()) @db.Timestamp(6)
+}
+
+model CrawlerStats {
+  id                               Int      @id @default(autoincrement())
+  requestsFinished                 Int?
+  requestsFailed                   Int?
+  retryHistogram                   String?
+  requestAvgFailedDurationMillis   Int?
+  requestAvgFinishedDurationMillis Int?
+  requestsFinishedPerMinute        Int?
+  requestsFailedPerMinute          Int?
+  requestTotalDurationMillis       Int?
+  requestsTotal                    Int?
+  crawlerRuntimeMillis             Int?
+  Site                             Site     @relation(fields: [siteId], references: [id])
+  siteId                           Int
+  createdAt                        DateTime @default(now()) @db.Timestamp(6)
+  updatedAt                        DateTime @default(now()) @db.Timestamp(6)
 }

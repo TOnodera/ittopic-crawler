@@ -1,4 +1,4 @@
-import { ArticleStore, NewArticle } from '@/store/articleStore.js';
+import { ArticleStore, NewArticle } from '@/store/ArticleStore.js';
 import { logger } from '@/utils/logger.js';
 import { SITE } from '@/config.js';
 import { makeHashFromString } from '@/utils/makeHash.js';
