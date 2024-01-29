@@ -13,6 +13,7 @@ export interface CrawlerStats {
   requestsTotal: number | null;
   crawlerRuntimeMillis: number | null;
   siteId: SITE;
+  batchHistoryId: number;
 }
 
 export class CrawlerStatsStore {

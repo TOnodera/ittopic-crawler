@@ -34,7 +34,7 @@ model Site {
 }
 
 model CrawlerStats {
-  id                               Int      @id @default(autoincrement())
+  id                               Int          @id @default(autoincrement())
   requestsFinished                 Int?
   requestsFailed                   Int?
   retryHistogram                   Int[]
@@ -45,8 +45,19 @@ model CrawlerStats {
   requestTotalDurationMillis       Int?
   requestsTotal                    Int?
   crawlerRuntimeMillis             Int?
-  Site                             Site     @relation(fields: [siteId], references: [id])
+  Site                             Site         @relation(fields: [siteId], references: [id])
   siteId                           Int
-  createdAt                        DateTime @default(now()) @db.Timestamp(6)
-  updatedAt                        DateTime @default(now()) @db.Timestamp(6)
+  createdAt                        DateTime     @default(now()) @db.Timestamp(6)
+  updatedAt                        DateTime     @default(now()) @db.Timestamp(6)
+  BatchHistory                     BatchHistory @relation(fields: [batchHistoryId], references: [id])
+  batchHistoryId                   Int
+}
+
+model BatchHistory {
+  id           Int            @id @default(autoincrement())
+  startAt      DateTime       @default(now()) @db.Timestamp(6)
+  endAt        DateTime       @default(now()) @db.Timestamp(6)
+  createdAt    DateTime       @default(now()) @db.Timestamp(6)
+  updatedAt    DateTime       @default(now()) @db.Timestamp(6)
+  CrawlerStats CrawlerStats[]
 }

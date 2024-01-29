@@ -3,6 +3,7 @@ import { SITE } from '@/config.js';
 import { PrismaClient } from '@prisma/client';
 import { resetAndSeedDatabase } from '../../settings/utility.js';
 import { CrawlerStats, CrawlerStatsStore } from '@/store/CrawlerStatsStore.js';
+import { batchHistorySeeder } from 'prisma/seeders/batchHistorySeeder.js';
 
 const client = new PrismaClient();
 const store = new CrawlerStatsStore(client);
@@ -19,6 +20,7 @@ const fixtures = [
     requestsTotal: 8,
     crawlerRuntimeMillis: 9,
     siteId: SITE.CLASSMETHOD,
+    batchHistoryId: 1,
   },
   {
     requestsFinished: undefined,
@@ -32,12 +34,14 @@ const fixtures = [
     requestsTotal: undefined,
     crawlerRuntimeMillis: undefined,
     siteId: SITE.CLASSMETHOD,
+    batchHistoryId: 2,
   },
 ] as CrawlerStats[];
 
-describe('articleStoreのテスト', () => {
+describe('crawlerStatsStoreのテスト', () => {
   beforeAll(async () => {
-    return await resetAndSeedDatabase(client);
+    await resetAndSeedDatabase(client);
+    return await batchHistorySeeder(client);
   });
   test('データの登録ができること', async () => {
     for (const idx in fixtures) {

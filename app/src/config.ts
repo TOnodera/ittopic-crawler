@@ -1,3 +1,6 @@
+import { log } from 'crawlee';
+import { Settings } from 'luxon';
+
 export interface Site {
   id: number;
   name: string;
@@ -37,4 +40,9 @@ export const SITES: { [key in SITE]: { id: SITE; name: string; urls: string[] } 
     name: SITE[SITE.FREEE],
     urls: ['https://developers.freee.co.jp/'],
   },
+};
+
+export const applyConfig = () => {
+  Settings.defaultZone = process.env.TZ as string;
+  log.setLevel(log.LEVELS.INFO);
 };

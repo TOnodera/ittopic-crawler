@@ -16,7 +16,6 @@ describe('clone()のテスト', () => {
       d: [undefined],
     };
     let b = clone(a) as Test;
-    console.log(b);
     expect(a.a).toBe(b.a);
     expect(a.b).toBe(b.b);
     expect(a.c).toBe(b.c);

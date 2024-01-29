@@ -1,5 +1,7 @@
 import { SITE } from '@/config.js';
+import { localNow } from '@/utils/time.js';
 import { PrismaClient } from '@prisma/client';
+import { DateTime } from 'luxon';
 
 export interface NewArticle {
   title: string;
@@ -31,7 +33,10 @@ export class ArticleStore {
   };
 
   updateArticle = async (data: Article) => {
-    await this.client.article.update({ where: { id: data.id }, data });
+    await this.client.article.update({
+      where: { id: data.id },
+      data: { ...data, updatedAt: localNow().toJSDate() },
+    });
   };
 
   getArticle = async (id: number): Promise<Article | null> => {

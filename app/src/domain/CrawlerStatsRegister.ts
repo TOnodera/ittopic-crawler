@@ -3,8 +3,10 @@ import { clone } from '@/utils/clone.js';
 
 export class CrawlerStatsRegister {
   private store: CrawlerStatsStore;
-  constructor(store: CrawlerStatsStore) {
+  private batchId: number;
+  constructor(store: CrawlerStatsStore, batchId: number) {
     this.store = store;
+    this.batchId = batchId;
   }
 
   private isNotRegisteable = (n: number | null | undefined): boolean => {
