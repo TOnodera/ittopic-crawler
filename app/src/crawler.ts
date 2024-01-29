@@ -1,20 +1,20 @@
-import { PlaywrightCrawler, createPlaywrightRouter } from 'crawlee';
+import { PlaywrightCrawler } from 'crawlee';
 import { SITES, SITE } from '@/config.js';
 import { getPrismaClient } from '@/store/prismaClient.js';
 import { ArticleStore } from '@/store/ArticleStore.js';
-import { HandlerFactory } from '../HandlerFactory.js';
-import { ClassmethodScraper } from './ClassmethodScraper.js';
+import { HandlerFactory } from './scrapers/HandlerFactory.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
+import { ScraperFactory } from './scrapers/ScraperFactory.js';
 
-export const classmethodLauncher = async (siteId: SITE) => {
+export const startCrawling = async (siteId: SITE) => {
   const client = getPrismaClient();
   const store = new ArticleStore(client);
-  const scraper = new ClassmethodScraper();
+  const scraper = ScraperFactory.get(siteId);
   const domain = new ArticleDomain(store, siteId);
-  const factory = new HandlerFactory(scraper, siteId, domain);
+  const handleFactory = new HandlerFactory(scraper, siteId, domain);
 
-  const urls = SITES[SITE.CLASSMETHOD].urls;
-  const requestHandler = await factory.get();
+  const urls = SITES[siteId].urls;
+  const requestHandler = await handleFactory.get();
   const classmethodCrawler = new PlaywrightCrawler({ requestHandler });
   return await { ...classmethodCrawler.run(urls), siteId };
 };
