@@ -2,16 +2,16 @@ import { SITE } from '@/config.js';
 import { PrismaClient } from '@prisma/client';
 
 export interface CrawlerStats {
-  requestsFinished?: number;
-  requestsFailed?: number;
+  requestsFinished: number | null;
+  requestsFailed: number | null;
   retryHistogram: number[];
-  requestAvgFailedDurationMillis?: number;
-  requestAvgFinishedDurationMillis?: number;
-  requestsFinishedPerMinute?: number;
-  requestsFailedPerMinute?: number;
-  requestTotalDurationMillis?: number;
-  requestsTotal?: number;
-  crawlerRuntimeMillis?: number;
+  requestAvgFailedDurationMillis: number | null;
+  requestAvgFinishedDurationMillis: number | null;
+  requestsFinishedPerMinute: number | null;
+  requestsFailedPerMinute: number | null;
+  requestTotalDurationMillis: number | null;
+  requestsTotal: number | null;
+  crawlerRuntimeMillis: number | null;
   siteId: SITE;
 }
 

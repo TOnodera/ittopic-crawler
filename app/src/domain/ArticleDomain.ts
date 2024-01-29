@@ -5,7 +5,7 @@ import { makeHashFromString } from '@/utils/makeHash.js';
 
 /**
  * このアプリケーションのメインロジックを実装
- * 内容は簡単データの新規登録か更新か判定して登録するだけ、
+ * 内容は簡単でデータの新規登録か更新か判定して登録するだけ、
  * ビジネスロジック的なものはここに書く
  *
  * 簡単なロジックだけど一応バリデーションは入れる
@@ -43,18 +43,19 @@ class ArticleDomain {
     }
     // データが存在しない場合は新規登録
     const oldArticle = await this.store.getArticleByContentId(this.siteId, data.contentId);
+    const contentHash = makeHashFromString(data.content);
     if (!oldArticle) {
-      await this.store.createArticle({ ...data, contentHash: makeHashFromString(data.content) });
+      await this.store.createArticle({ ...data, contentHash });
       logger.info(`${SITE[this.siteId]} title: ${data.title} を登録しました`);
     }
     // データは存在するが、ハッシュ値が登録済みデータと一致しない場合はデータが更新されたとみなしてDBも更新する
     // 実装したけどこのパターンは多分あんまないと思う
     else {
-      if (oldArticle.contentHash != data.contentHash) {
+      if (oldArticle.contentHash != contentHash) {
         await this.store.updateArticle({
           ...oldArticle,
           content: data.content,
-          contentHash: makeHashFromString(data.content),
+          contentHash,
         });
         logger.info(`${SITE[this.siteId]} title: ${data.title} を更新しました`);
       }
