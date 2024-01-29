@@ -31,7 +31,8 @@
 				"prisma.prisma",
 				"esbenp.prettier-vscode",
 				"dbaeumer.vscode-eslint",
-				"orta.vscode-jest"
+				"orta.vscode-jest",
+				"mhutchie.git-graph"
 			],
 			"settings": {
 				"[typescript]": {
