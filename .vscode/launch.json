@@ -20,6 +20,19 @@
             "console": "integratedTerminal",
             "internalConsoleOptions": "neverOpen",
             "program": "${workspaceFolder}/app/node_modules/.bin/jest",
+        },
+        {
+            "name": "Start",
+            "request": "launch",
+            "runtimeArgs": [
+                "start"
+            ],
+            "cwd": "${workspaceFolder}/app",
+            "runtimeExecutable": "npm",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
         }
     ]
 }
