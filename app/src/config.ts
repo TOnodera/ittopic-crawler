@@ -4,14 +4,14 @@ export interface Site {
 }
 
 export enum SITE {
-  QIITA = 1,
+  QIITA = 1 as number,
   CLASSMETHOD = 2,
   CYBOZUSHIKI = 3,
   SONICGARDEN = 4,
   FREEE = 5,
 }
 
-export const SITES: { [key: number]: { id: SITE; name: string; urls: string[] } } = {
+export const SITES: { [key in SITE]: { id: SITE; name: string; urls: string[] } } = {
   [SITE.QIITA]: {
     id: SITE.QIITA,
     name: SITE[SITE.QIITA],

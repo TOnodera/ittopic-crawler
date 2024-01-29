@@ -37,7 +37,7 @@ model CrawlerStats {
   id                               Int      @id @default(autoincrement())
   requestsFinished                 Int?
   requestsFailed                   Int?
-  retryHistogram                   String?
+  retryHistogram                   Int[]
   requestAvgFailedDurationMillis   Int?
   requestAvgFinishedDurationMillis Int?
   requestsFinishedPerMinute        Int?

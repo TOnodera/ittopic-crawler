@@ -4,7 +4,7 @@ import { PrismaClient } from '@prisma/client';
 export interface CrawlerStats {
   requestsFinished?: number;
   requestsFailed?: number;
-  retryHistogram?: string;
+  retryHistogram: number[];
   requestAvgFailedDurationMillis?: number;
   requestAvgFinishedDurationMillis?: number;
   requestsFinishedPerMinute?: number;
@@ -22,5 +22,8 @@ export class CrawlerStatsStore {
   }
   async createCrawlerStats(data: CrawlerStats) {
     await this.client.crawlerStats.create({ data });
+  }
+  async getCrawlerStats(id: number) {
+    return await this.client.crawlerStats.findUnique({ where: { id } });
   }
 }
