@@ -4,7 +4,6 @@ import { StatsRegister } from '@/application/StatsRegister.js';
 import { ArticleStore } from '@/store/ArticleStore.js';
 import { BatchHistoryStore } from '@/store/BatchHistoryStore.js';
 import { CrawlerStatsStore } from '@/store/CrawlerStatsStore.js';
-import { localNow } from '@/utils/time.js';
 import { PrismaClient } from '@prisma/client';
 
 export class BatchEntry {
@@ -17,7 +16,7 @@ export class BatchEntry {
     const crawlerStatsStore = new CrawlerStatsStore(this.client);
     const articleStore = new ArticleStore(this.client);
     const batchHistoryId = await batchHistoryStore.createBatchHistory();
-    const statsRegister = new StatsRegister(crawlerStatsStore, batchHistoryId);
+    const statsRegister = new StatsRegister(crawlerStatsStore);
     const crawler = new Crawler(articleStore, batchHistoryId);
 
     [

@@ -2,15 +2,13 @@ import { CrawlerStatsRegister } from '@/domain/CrawlerStatsRegister.js';
 import { CrawlerStats, CrawlerStatsStore } from '@/store/CrawlerStatsStore.js';
 
 export class StatsRegister {
-  private batchHistoryId: number;
   private store: CrawlerStatsStore;
-  constructor(store: CrawlerStatsStore, batchHistoryId: number) {
+  constructor(store: CrawlerStatsStore) {
     this.store = store;
-    this.batchHistoryId = batchHistoryId;
   }
 
   regist = async (stats: CrawlerStats) => {
-    const statsRegister = new CrawlerStatsRegister(this.store, this.batchHistoryId);
+    const statsRegister = new CrawlerStatsRegister(this.store);
     await statsRegister.regist(stats);
   };
 }
