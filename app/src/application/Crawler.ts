@@ -1,10 +1,10 @@
 import { PlaywrightCrawler } from 'crawlee';
 import { SITES, SITE } from '@/config.js';
 import { ArticleStore } from '@/store/ArticleStore.js';
-import { HandlerFactory } from './scrapers/HandlerFactory.js';
+import { HandlerFactory } from '../scrapers/HandlerFactory.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
-import { ScraperFactory } from './scrapers/ScraperFactory.js';
-import { CrawlerStats } from './store/CrawlerStatsStore.js';
+import { ScraperFactory } from '../scrapers/ScraperFactory.js';
+import { CrawlerStats } from '../store/CrawlerStatsStore.js';
 
 export class Crawler {
   private store: ArticleStore;

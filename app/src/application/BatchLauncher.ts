@@ -1,6 +1,6 @@
 import { SITE } from '@/config.js';
-import { Crawler } from '@/crawler.js';
-import { StatsRegister } from '@/stats/StatsRegister.js';
+import { Crawler } from '@/application/Crawler.js';
+import { StatsRegister } from '@/application/StatsRegister.js';
 import { ArticleStore } from '@/store/ArticleStore.js';
 import { BatchHistoryStore } from '@/store/BatchHistoryStore.js';
 import { CrawlerStatsStore } from '@/store/CrawlerStatsStore.js';

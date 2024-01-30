@@ -1,4 +1,4 @@
-import { BatchEntry } from './domain/BatchLauncher.js';
+import { BatchEntry } from './application/BatchLauncher.js';
 import { getPrismaClient } from './store/prismaClient.js';
 import { applyConfig } from './config.js';
 
