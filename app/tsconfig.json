@@ -11,6 +11,7 @@
             "DOM"
         ],
         "baseUrl": "./",
-        "paths": {"@/*" : ["src/*"]}
+        "paths": {"@/*" : ["src/*"]},
     },
+    "exclude": ["__tests__", "jest.config.*"]
 }

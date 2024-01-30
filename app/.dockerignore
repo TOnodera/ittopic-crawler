@@ -1,10 +1,8 @@
-# configurations
-.idea
-
 # crawlee and apify storage folders
 apify_storage
 crawlee_storage
 storage
+coverage
 
 # installed files
 node_modules

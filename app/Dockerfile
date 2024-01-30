@@ -24,19 +24,18 @@ RUN sed -i -e 's/# \(ja_JP.UTF-8\)/\1/' /etc/locale.gen \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
     && echo $TZ > /etc/timezone
 
-RUN npm i -g dotenv-cli
-    
-# node, npm, npxを使えるようにする
-# RUN wget https://nodejs.org/dist/v20.11.0/node-v20.11.0-linux-x64.tar.xz \
-#     && tar xfv node-v20.11.0-linux-x64.tar.xz \
-#     && mv node-v20.11.0-linux-x64/bin/node /usr/local/bin/node \
-#     && ln -s /node-v20.11.0-linux-x64/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm \
-#     && ln -s /node-v20.11.0-linux-x64/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 
-# 開発時に利用するユーザー
+RUN npm i -g dotenv-cli tsc-alias
 ARG userid=1000
 RUN usermod -s /bin/bash -u ${userid} node
-WORKDIR /home/node/crawler
+WORKDIR /home/node/crawler/app
+COPY . /home/node/crawler/app 
 RUN chown -R ${userid}:${userid} /home/node/
 
 USER node
+RUN pwd > /dev/stderr
+RUN npm ci && npm run build 
+
+CMD ["npm", "run" ,"start:prod"]
+
+
