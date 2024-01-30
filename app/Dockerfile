@@ -18,11 +18,8 @@ RUN apt-get update \
 
 # ロケール設定
 ENV LANG ja_JP.UTF-8 
-ENV TZ 'Asia/Tokyo'
 RUN sed -i -e 's/# \(ja_JP.UTF-8\)/\1/' /etc/locale.gen \
-    && locale-gen \
-    && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
-    && echo $TZ > /etc/timezone
+    && locale-gen
 
 # ユーザー設定
 RUN npm i -g dotenv-cli tsc-alias

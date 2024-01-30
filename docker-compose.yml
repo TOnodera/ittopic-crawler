@@ -2,7 +2,8 @@ version: "3"
 services:
   app:
     build: ./app
-  db:
+  # 開発用DB
+  postgres-service:
     build: ./postgres
     ports:
       - 5432:5432
@@ -10,6 +11,7 @@ services:
       POSTGRES_DB: crawler
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+  # テスト用DB
   db_test:
     build: ./postgres
     ports:
