@@ -15,6 +15,15 @@
     "plugins": [
         "@typescript-eslint"
     ],
+    "overrides": [
+      {
+        "files": ["tests/**/*"],
+        "plugins": ["jest"],
+        "env": {
+          "jest/globals": true
+        }
+      }
+    ],
     "rules": {
     }
 }

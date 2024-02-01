@@ -13,4 +13,5 @@
         "baseUrl": "./",
         "paths": {"@/*" : ["src/*"]},
     },
+    "exclude": ["tests", "jest.config.*"]
 }

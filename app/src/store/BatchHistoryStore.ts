@@ -1,12 +1,7 @@
 import { localNow } from '@/utils/time.js';
 import { PrismaClient } from '@prisma/client';
 
-export interface BatchHistory {
-  startAt?: Date;
-  endAt?: Date;
-  createdAt?: Date;
-  updatedAt?: Date;
-}
+
 export class BatchHistoryStore {
   private client: PrismaClient;
   constructor(client: PrismaClient) {
