@@ -32,7 +32,6 @@ RUN chown -R ${userid}:${userid} /home/node/
 # 起動
 USER node
 RUN npm ci && npm run build 
-# CMD ["npm", "run" ,"start:prod"]
-CMD ["sleep", "infinity"]
+CMD ["npm", "run" ,"start:prod"]
 
 

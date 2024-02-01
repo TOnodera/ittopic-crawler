@@ -1,7 +1,5 @@
 import { SITE } from '@/config.js';
 import { localNow } from '@/utils/time.js';
-import { PrismaClient } from '@prisma/client';
-import { DateTime } from 'luxon';
 
 export interface NewArticle {
   title: string;

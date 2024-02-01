@@ -2,7 +2,7 @@
   "name": "app",
   "version": "0.0.1",
   "type": "module",
-  "description": "This is an example of a Crawlee project.",
+  "description": "Crawlee project.",
   "dependencies": {
     "@prisma/client": "^5.8.1",
     "@types/jest": "^29.5.11",
@@ -14,7 +14,6 @@
     "pino": "^8.17.2",
     "playwright": "*",
     "prettier": "^3.2.4",
-    "prisma": "^5.8.1",
     "ts-jest": "^29.1.2",
     "tsx": "^4.7.0"
   },
@@ -29,15 +28,12 @@
     "typescript": "~5.3.0"
   },
   "scripts": {
-    "start": "npm run start:dev",
-    "start:prod": "node dist/src/main.js",
-    "start:dev": "tsx src/main.ts",
+    "start": "npm run build && node dist/src/main.js",
+    "dev": "tsx src/main.ts",
+    "watch": "tsx watch src/main.ts",
     "build": "rm -rf ./dist && tsc --project tsconfig.prod.json && tsc-alias -p tsconfig.json",
-    "db:seed": "tsx prisma/seeders/run.ts",
-    "db:reset": "prisma migrate reset --force",
-    "db.test:reset": "DATABASE_URL=postgresql://postgres:password@db_test:5432/crawler?schema=public prisma migrate reset --force",
-    "test": "npm run db.test:reset && jest --runInBand"
+    "test": "jest --runInBand"
   },
-  "author": "It's not you it's me",
+  "author": "t.onodera",
   "license": "ISC"
 }
