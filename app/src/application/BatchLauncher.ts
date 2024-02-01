@@ -4,11 +4,9 @@ import { StatsRegister } from '@/application/StatsRegister.js';
 import { ArticleStore } from '@/store/ArticleStore.js';
 import { BatchHistoryStore } from '@/store/BatchHistoryStore.js';
 import { CrawlerStatsStore } from '@/store/CrawlerStatsStore.js';
-import { PrismaClient } from '@prisma/client';
 
 export class BatchEntry {
-  private client: PrismaClient;
-  constructor(client: PrismaClient) {
+  constructor(client: any) {
     this.client = client;
   }
   launch = async (): Promise<void> => {

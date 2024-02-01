@@ -28,7 +28,7 @@ const config: Config = {
   coverageDirectory: 'coverage',
 
   // An array of regexp pattern strings used to skip coverage collection
-  coveragePathIgnorePatterns: ['/node_modules/', '/tests\\/settings/', '/prisma/'],
+  coveragePathIgnorePatterns: ['/node_modules/', '/tests\\/settings/'],
 
   // Indicates which provider should be used to instrument code for coverage
   coverageProvider: 'v8',
@@ -92,7 +92,6 @@ const config: Config = {
   moduleNameMapper: {
     //   '^src/(.+)': '<rootDir>/src/$1',
     '^(\\.{1,2}/.*)\\.js$': '$1',
-    '^prisma/(.*)\\.js': '<rootDir>/prisma/$1',
     '^@/(.*)\\.js': '<rootDir>/src/$1', // これが必要だった！！
   },
 
@@ -161,7 +160,7 @@ const config: Config = {
   // The glob patterns Jest uses to detect test files
   testMatch: ['**/tests/**/*.[jt]s?(x)'],
   // An array of regexp pattern strings that are matched against all test paths, matched tests are skipped
-  testPathIgnorePatterns: ['/node_modules/', '/tests\\/settings/', '/prisma/'],
+  testPathIgnorePatterns: ['/node_modules/', '/tests\\/settings/'],
 
   // The regexp pattern or array of patterns that Jest uses to detect test files
   // testRegex: [],
