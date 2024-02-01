@@ -46,3 +46,5 @@ export const applyConfig = () => {
   Settings.defaultZone = process.env.TZ as string;
   log.setLevel(log.LEVELS.INFO);
 };
+
+export const HTTP_RETRY_COUNT = 3;

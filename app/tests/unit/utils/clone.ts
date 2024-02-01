@@ -7,6 +7,7 @@ interface Test {
   c: string | null | undefined;
   d: (string | null | undefined)[];
 }
+
 describe('clone()のテスト', () => {
   test('ディープコピーを生成できる', () => {
     const a: Test = {
