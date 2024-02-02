@@ -9,6 +9,6 @@ export class BatchHistoryStore {
     return await this.client.post('/batch-start-writer', data);
   }
   async updateBatchHistory(id: number, data?: BatchHistory): Promise<number> {
-    return await this.client.post('batch-end-writer', { id, data });
+    return await this.client.post('/batch-end-writer', { id, data });
   }
 }
