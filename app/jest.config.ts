@@ -92,7 +92,8 @@ const config: Config = {
   moduleNameMapper: {
     //   '^src/(.+)': '<rootDir>/src/$1',
     '^(\\.{1,2}/.*)\\.js$': '$1',
-    '^@/(.*)\\.js': '<rootDir>/src/$1', // これが必要だった！！
+    '^@/(.*)\\.js': '<rootDir>/src/$1',
+    '^@/(.*)': '<rootDir>/src/$1',
   },
 
   // An array of regexp pattern strings, matched against all module paths before considered 'visible' to the module loader
