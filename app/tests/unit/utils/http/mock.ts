@@ -1,27 +1,11 @@
-import { http, graphql, HttpResponse } from 'msw';
+import { http,  HttpResponse, HttpHandler } from 'msw';
+import { setupServer } from 'msw/node';
 
-export const handlers = [
-  http.get('https://api.example.com/user', () => {
-    return HttpResponse.json({
-      firstName: 'John',
-      lastName: 'Maverick',
-    });
-  }),
-  graphql.query('ListMovies', () => {
-    return HttpResponse.json({
-      data: {
-        movies: [
-          {
-            title: 'The Lord of The Rings',
-          },
-          {
-            title: 'The Matrix',
-          },
-          {
-            title: 'Star Wars: The Empire Strikes Back',
-          },
-        ],
-      },
-    });
+const baseURL = 'http://api.private-service:3000/api-private';
+const handlers: HttpHandler[] = [
+  http.post(`${baseURL}/scceeded`, () => {
+    return HttpResponse.json({id: 1});
   }),
 ];
+
+export const server = setupServer(...handlers);

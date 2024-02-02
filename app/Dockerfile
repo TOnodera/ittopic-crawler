@@ -29,9 +29,10 @@ WORKDIR /home/node/crawler/app
 COPY . /home/node/crawler/app 
 RUN chown -R ${userid}:${userid} /home/node/
 
+RUN npm update -g npm 
 # 起動
 USER node
-# RUN npm ci && npm run build 
+# RUN npm ci 
 # CMD ["npm", "run" ,"start:prod"]
 
 
