@@ -1,8 +1,8 @@
 import { BatchEntry } from './application/BatchLauncher.js';
 import { applyConfig } from './config.js';
+import { http } from './utils/axios.js';
 
 applyConfig();
 
-const client = getPrismaClient();
-const batch = new BatchEntry(client);
+const batch = new BatchEntry(http);
 batch.launch().then(() => console.log('done'));

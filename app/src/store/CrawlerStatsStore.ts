@@ -1,5 +1,5 @@
 import { SITE } from '@/config.js';
-import { PrismaClient } from '@prisma/client';
+import { AxiosInstance } from 'axios';
 
 export interface CrawlerStats {
   requestsFinished: number | null;
@@ -17,14 +17,11 @@ export interface CrawlerStats {
 }
 
 export class CrawlerStatsStore {
-  private client: PrismaClient;
-  constructor(client: PrismaClient) {
+  private client: AxiosInstance;
+  constructor(client: AxiosInstance) {
     this.client = client;
   }
   async createCrawlerStats(data: CrawlerStats) {
-    await this.client.crawlerStats.create({ data });
-  }
-  async getCrawlerStats(id: number) {
-    return await this.client.crawlerStats.findUnique({ where: { id } });
+    await this.client.post('/crawler-stats-writer', data);
   }
 }

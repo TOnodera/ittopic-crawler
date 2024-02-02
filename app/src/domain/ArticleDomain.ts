@@ -48,19 +48,6 @@ class ArticleDomain {
       await this.store.createArticle({ ...data, contentHash });
       logger.info(`${SITE[this.siteId]} title: ${data.title} を登録しました`);
     }
-    // データは存在するが、ハッシュ値が登録済みデータと一致しない場合はデータが更新されたとみなしてDBも更新する
-    // 実装したけどこのパターンは多分あんまないと思う
-    else {
-      if (oldArticle.contentHash != contentHash) {
-        await this.store.updateArticle({
-          ...oldArticle,
-          content: data.content,
-          contentHash,
-        });
-        logger.info(`${SITE[this.siteId]} title: ${data.title} を更新しました`);
-      }
-    }
-
     return true;
   }
 }

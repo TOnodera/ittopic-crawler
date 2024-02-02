@@ -4,9 +4,11 @@ import { StatsRegister } from '@/application/StatsRegister.js';
 import { ArticleStore } from '@/store/ArticleStore.js';
 import { BatchHistoryStore } from '@/store/BatchHistoryStore.js';
 import { CrawlerStatsStore } from '@/store/CrawlerStatsStore.js';
+import { AxiosInstance } from 'axios';
 
 export class BatchEntry {
-  constructor(client: any) {
+  private client: AxiosInstance;
+  constructor(client: AxiosInstance) {
     this.client = client;
   }
   launch = async (): Promise<void> => {

@@ -1,5 +1,6 @@
 import { SITE } from '@/config.js';
 import { localNow } from '@/utils/time.js';
+import { AxiosInstance } from 'axios';
 
 export interface NewArticle {
   title: string;
@@ -22,25 +23,15 @@ export interface Article {
 }
 
 export class ArticleStore {
-  private client: PrismaClient;
-  constructor(client: PrismaClient) {
+  private client: AxiosInstance;
+  constructor(client: AxiosInstance) {
     this.client = client;
   }
   createArticle = async (data: NewArticle) => {
-    await this.client.article.create({ data: { ...data, published: true } });
+    return await this.client.post('/article-writer', data);
   };
 
-  updateArticle = async (data: Article) => {
-    await this.client.article.update({
-      where: { id: data.id },
-      data: { ...data, updatedAt: localNow().toJSDate() },
-    });
-  };
-
-  getArticle = async (id: number): Promise<Article | null> => {
-    return this.client.article.findUnique({ where: { id } });
-  };
   getArticleByContentId = async (siteId: SITE, contentId: string): Promise<Article | null> => {
-    return this.client.article.findFirst({ where: { contentId, siteId } });
+    return await this.client.get(`/article-reader/${siteId}/${contentId}`);
   };
 }
