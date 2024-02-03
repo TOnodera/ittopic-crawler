@@ -32,6 +32,7 @@ RUN chown -R ${userid}:${userid} /home/node/
 RUN npm update -g npm 
 # 起動
 USER node
+CMD sleep infinity
 # RUN npm ci 
 # CMD ["npm", "run" ,"start:prod"]
 

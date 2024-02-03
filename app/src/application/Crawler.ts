@@ -21,8 +21,8 @@ export class Crawler {
 
     const urls = SITES[siteId].urls;
     const requestHandler = await handleFactory.get();
-    const classmethodCrawler = new PlaywrightCrawler({ requestHandler });
-    const result = await classmethodCrawler.run(urls);
+    const crawler = new PlaywrightCrawler({ requestHandler });
+    const result = await crawler.run(urls);
     return { ...result, siteId, batchHistoryId: this.batchHistoryId };
   };
 }

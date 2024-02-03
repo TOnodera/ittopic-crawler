@@ -1,6 +1,6 @@
 import { SITE } from '@/config.js';
 import { localNow } from '@/utils/time.js';
-import { AxiosInstance } from 'axios';
+import { AxiosInstance, AxiosResponse } from 'axios';
 
 export interface NewArticle {
   title: string;
@@ -31,7 +31,10 @@ export class ArticleStore {
     return await this.client.post('/article-writer', data);
   };
 
-  getArticleByContentId = async (siteId: SITE, contentId: string): Promise<Article | null> => {
+  getArticleByContentId = async (
+    siteId: SITE,
+    contentId: string
+  ): Promise<AxiosResponse<Article | null>> => {
     return await this.client.get(`/article-reader/${siteId}/${contentId}`);
   };
 }

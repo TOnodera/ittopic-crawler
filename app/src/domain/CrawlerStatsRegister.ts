@@ -12,7 +12,7 @@ export class CrawlerStatsRegister {
   };
 
   regist = async (stats: CrawlerStats): Promise<void> => {
-    const data = clone(stats) as CrawlerStats;
+    const data = structuredClone(stats) as CrawlerStats;
     if (this.isNotRegisteable(stats.requestsFinished)) {
       data.requestsFinished = null;
     }

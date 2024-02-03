@@ -3,7 +3,7 @@ import axios from 'axios';
 import axiosRetry from 'axios-retry';
 
 const http = axios.create({
-  baseURL: 'http://api.private-service/api-private/',
+  baseURL: 'http://private.api-service:3000/api-private/',
 });
 
 axiosRetry(axios, { retries: HTTP_RETRY_COUNT });

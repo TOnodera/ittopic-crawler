@@ -2,6 +2,8 @@ version: "3"
 services:
   app:
     build: ./app
+    volumes:
+      - ./:/home/node/crawler
 # 開発時はapi側で作ったネットワークを使うのでapi側のdocker-composeも起動しとく
 networks:
   default:

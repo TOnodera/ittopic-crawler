@@ -44,7 +44,7 @@ class ArticleDomain {
     // データが存在しない場合は新規登録
     const oldArticle = await this.store.getArticleByContentId(this.siteId, data.contentId);
     const contentHash = makeHashFromString(data.content);
-    if (!oldArticle) {
+    if (!oldArticle.data) {
       await this.store.createArticle({ ...data, contentHash });
       logger.info(`${SITE[this.siteId]} title: ${data.title} を登録しました`);
     }
