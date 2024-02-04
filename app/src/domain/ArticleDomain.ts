@@ -1,4 +1,4 @@
-import { ArticleStore, NewArticle } from '@/store/ArticleStore.js';
+import { AppStore, NewArticle } from '@/store/AppStore.js';
 import { logger } from '@/utils/logger.js';
 import { SITE } from '@/config.js';
 import { makeHashFromString } from '@/utils/makeHash.js';
@@ -11,10 +11,10 @@ import { makeHashFromString } from '@/utils/makeHash.js';
  * 簡単なロジックだけど一応バリデーションは入れる
  */
 class ArticleDomain {
-  private store: ArticleStore;
+  private store: AppStore;
   private siteId: SITE;
   private batchHistoryId: number;
-  constructor(store: ArticleStore, siteId: SITE, batchHistoryId: number) {
+  constructor(store: AppStore, siteId: SITE, batchHistoryId: number) {
     this.store = store;
     this.siteId = siteId;
     this.batchHistoryId = batchHistoryId;
@@ -26,7 +26,7 @@ class ArticleDomain {
    * @param data
    * @returns
    */
-  async save(data: NewArticle): Promise<boolean> {
+  async push(data: NewArticle): Promise<boolean> {
     /**
      * データ登録部
      */
@@ -47,11 +47,14 @@ class ArticleDomain {
     const oldArticle = await this.store.getArticleByContentId(this.siteId, data.contentId);
     const contentHash = makeHashFromString(data.content);
     if (!oldArticle.data) {
-      await this.store.createArticle({ ...data, contentHash, batchHistoryId: this.batchHistoryId });
-      logger.info(`${SITE[this.siteId]} title: ${data.title} を登録しました`);
+      // 登録リストに追加
+      await this.store.pushBuff({ ...data, contentHash, batchHistoryId: this.batchHistoryId });
+      logger.info(`${SITE[this.siteId]} title: ${data.title} を登録リストに追加しました`);
     }
     return true;
   }
+
+  regist = async () => {};
 }
 
 export { ArticleDomain };

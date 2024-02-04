@@ -1,5 +1,5 @@
 import { SITE } from '@/config.js';
-import { NewArticle } from '@/store/ArticleStore.js';
+import { NewArticle } from '@/store/AppStore';
 import { Request } from 'crawlee';
 import { Page } from 'playwright';
 

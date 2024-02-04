@@ -30,7 +30,7 @@ export class HandlerFactory {
     // 詳細ページのハンドラ
     requestHandler.addHandler('ARTICLE', async ({ request, page }): Promise<void> => {
       const data = await this.scraper.getPageData(request, page, this.siteId);
-      await this.domain.save(data);
+      await this.domain.push(data);
     });
     // enqueueLinksのセレクタに一覧ページに表示されている取得したい記事のリンクのセレクタを入れる
     requestHandler.addDefaultHandler(async ({ enqueueLinks }) => {

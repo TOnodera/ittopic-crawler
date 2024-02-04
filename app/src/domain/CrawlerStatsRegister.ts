@@ -1,17 +1,11 @@
-import { CrawlerStats, CrawlerStatsStore } from '@/store/CrawlerStatsStore.js';
-import { clone } from '@/utils/clone.js';
+import { CrawlerStats } from '@/store/AppStore';
 
 export class CrawlerStatsRegister {
-  private store: CrawlerStatsStore;
-  constructor(store: CrawlerStatsStore) {
-    this.store = store;
-  }
-
   private isNotRegisteable = (n: number | null | undefined): boolean => {
     return !Number.isFinite(n) || Number.isNaN(n) || (n !== 0 && !n);
   };
 
-  regist = async (stats: CrawlerStats): Promise<void> => {
+  translate = (stats: CrawlerStats): CrawlerStats => {
     const data = structuredClone(stats) as CrawlerStats;
     if (this.isNotRegisteable(stats.requestsFinished)) {
       data.requestsFinished = null;
@@ -43,6 +37,6 @@ export class CrawlerStatsRegister {
     if (this.isNotRegisteable(stats.crawlerRuntimeMillis)) {
       data.crawlerRuntimeMillis = null;
     }
-    await this.store.createCrawlerStats(data);
+    return data;
   };
 }

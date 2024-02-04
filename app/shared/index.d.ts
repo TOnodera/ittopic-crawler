@@ -1,3 +1,5 @@
+import { NewArticleRequest } from '@/store/AppStore';
+
 interface NewArticle {
   title: string;
   siteId: number;
@@ -38,6 +40,12 @@ interface CrawlerStats {
   crawlerRuntimeMillis: number | null;
   siteId: SITE;
   batchHistoryId: number;
+}
+
+interface CrawlingResult {
+  siteId: SITE;
+  articles: NewArticleRequest[];
+  stats: CrawlerStats;
 }
 
 interface BatchHistory {

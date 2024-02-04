@@ -1,4 +1,4 @@
-import { NewArticle } from '@/store/ArticleStore.js';
+import { NewArticle } from '@/store/AppStore.js';
 import { Request, Dictionary } from 'crawlee';
 import { Page } from 'playwright';
 import { Scraper } from '../Scraper.js';

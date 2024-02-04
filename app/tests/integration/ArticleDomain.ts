@@ -1,12 +1,12 @@
 import { test, describe, expect } from '@jest/globals';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
-import { ArticleStore, NewArticle } from '@/store/ArticleStore.js';
+import { AppStore, NewArticle } from '@/store/AppStore.js';
 import { PrismaClient } from '@prisma/client';
 import { SITE } from '@/config.js';
 import { resetAndSeedDatabase, resetDatabase } from '../settings/utility.js';
 
 const client = new PrismaClient();
-const store = new ArticleStore(client);
+const store = new AppStore(client);
 const article = {
   title: 'title',
   content: 'content',
