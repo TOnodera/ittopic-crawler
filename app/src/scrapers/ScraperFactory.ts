@@ -5,20 +5,25 @@ import { CybozushikiScraper } from './cybozushiki/CybozushikiScraper.js';
 import { FreeeScraper } from './freee/FreeeScraper.js';
 import { QiitaScraper } from './qiita/QiitaScraper.js';
 import { SonicgardenScraper } from './sonicgarden/SonicgardenScraper.js';
+import { Ogp } from '@/utils/ogp.js';
 
 export class ScraperFactory {
-  static get(siteId: SITE): Scraper {
+  private ogp: Ogp;
+  constructor(ogp: Ogp) {
+    this.ogp = ogp;
+  }
+  get(siteId: SITE): Scraper {
     switch (siteId) {
       case SITE.CLASSMETHOD:
-        return new ClassmethodScraper();
+        return new ClassmethodScraper(this.ogp);
       case SITE.CYBOZUSHIKI:
-        return new CybozushikiScraper();
+        return new CybozushikiScraper(this.ogp);
       case SITE.FREEE:
-        return new FreeeScraper();
+        return new FreeeScraper(this.ogp);
       case SITE.QIITA:
-        return new QiitaScraper();
+        return new QiitaScraper(this.ogp);
       case SITE.SONICGARDEN:
-        return new SonicgardenScraper();
+        return new SonicgardenScraper(this.ogp);
     }
   }
 }

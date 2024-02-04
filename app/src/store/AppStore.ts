@@ -1,6 +1,6 @@
 import { SITE } from '@/config.js';
 import { AxiosInstance, AxiosResponse } from 'axios';
-import { BatchHistory, CrawlingResult } from 'shared';
+import { BatchHistory, BatchResult, CrawlingResult } from 'shared';
 
 export interface NewArticleRequest {
   title: string;
@@ -9,7 +9,9 @@ export interface NewArticleRequest {
   contentHash: string;
   url: string;
   contentId: string;
-  batchHistoryId: number;
+  ogpTitle: string | null;
+  ogpImage: string | null;
+  ogpDescription: string | null;
 }
 
 export interface CrawlerStats {
@@ -24,7 +26,6 @@ export interface CrawlerStats {
   requestsTotal: number | null;
   crawlerRuntimeMillis: number | null;
   siteId: SITE;
-  batchHistoryId: number;
 }
 
 export interface NewArticle {
@@ -66,7 +67,7 @@ export class AppStore {
     return data.id;
   }
 
-  async regist(data: CrawlingResult[]): Promise<boolean> {
+  async regist(data: BatchResult): Promise<boolean> {
     const { isError } = await this.client.post<any, { isError: boolean }>('/regist', { data });
     return isError;
   }

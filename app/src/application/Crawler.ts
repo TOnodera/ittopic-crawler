@@ -5,18 +5,19 @@ import { HandlerFactory } from '../scrapers/HandlerFactory.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
 import { ScraperFactory } from '../scrapers/ScraperFactory.js';
 import { CrawlingResult } from 'shared/index.js';
+import { Ogp } from '@/utils/ogp.js';
 
 export class Crawler {
   private store: AppStore;
-  private batchHistoryId: number;
-  constructor(store: AppStore, batchHistoryId: number) {
+  constructor(store: AppStore) {
     this.store = store;
-    this.batchHistoryId = batchHistoryId;
   }
 
   run = async (siteId: SITE): Promise<CrawlingResult> => {
-    const scraper = ScraperFactory.get(siteId);
-    const domain = new ArticleDomain(this.store, siteId, this.batchHistoryId);
+    const ogp = new Ogp();
+    const factory = new ScraperFactory(ogp);
+    const scraper = factory.get(siteId);
+    const domain = new ArticleDomain(this.store, siteId);
     const handleFactory = new HandlerFactory(scraper, siteId, domain);
 
     const urls = SITES[siteId].urls;
@@ -25,6 +26,6 @@ export class Crawler {
     const stats = await crawler.run(urls);
     const articles = this.store.getBuffAll();
 
-    return { siteId, stats: { ...stats, siteId, batchHistoryId: this.batchHistoryId }, articles };
+    return { siteId, stats: { ...stats, siteId }, articles };
   };
 }

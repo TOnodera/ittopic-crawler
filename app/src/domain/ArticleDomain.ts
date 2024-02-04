@@ -13,11 +13,9 @@ import { makeHashFromString } from '@/utils/makeHash.js';
 class ArticleDomain {
   private store: AppStore;
   private siteId: SITE;
-  private batchHistoryId: number;
-  constructor(store: AppStore, siteId: SITE, batchHistoryId: number) {
+  constructor(store: AppStore, siteId: SITE) {
     this.store = store;
     this.siteId = siteId;
-    this.batchHistoryId = batchHistoryId;
   }
 
   /**
@@ -48,7 +46,7 @@ class ArticleDomain {
     const contentHash = makeHashFromString(data.content);
     if (!oldArticle.data) {
       // 登録リストに追加
-      await this.store.pushBuff({ ...data, contentHash, batchHistoryId: this.batchHistoryId });
+      await this.store.pushBuff({ ...data, contentHash });
       logger.info(`${SITE[this.siteId]} title: ${data.title} を登録リストに追加しました`);
     }
     return true;

@@ -39,13 +39,17 @@ interface CrawlerStats {
   requestsTotal: number | null;
   crawlerRuntimeMillis: number | null;
   siteId: SITE;
-  batchHistoryId: number;
 }
 
 interface CrawlingResult {
   siteId: SITE;
   articles: NewArticleRequest[];
   stats: CrawlerStats;
+}
+
+interface BatchResult {
+  crawlingResults: CrawlingResult[];
+  batchHistory: BatchHistory;
 }
 
 interface BatchHistory {

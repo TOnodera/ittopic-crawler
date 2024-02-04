@@ -2,6 +2,7 @@ import { SITE } from '@/config.js';
 import { Crawler } from '@/application/Crawler.js';
 import { AxiosInstance } from 'axios';
 import { AppStore } from '@/store/AppStore';
+import { BatchResult } from 'shared';
 
 export class BatchEntry {
   private client: AxiosInstance;
@@ -10,20 +11,30 @@ export class BatchEntry {
   }
   launch = async (): Promise<void> => {
     const appStore = new AppStore(this.client);
-    const batchHistoryId = await appStore.createBatchHistory();
-    const crawler = new Crawler(appStore, batchHistoryId);
+    const crawler = new Crawler(appStore);
 
-    const result = [
+    // 開始時刻を取得
+    const startAt = new Date();
+
+    const crawlingResults = [
       // await crawler.run(SITE.CLASSMETHOD),
       // await crawler.run(SITE.CYBOZUSHIKI),
       // await crawler.run(SITE.FREEE),
-      await crawler.run(SITE.QIITA),
+      // await crawler.run(SITE.QIITA),
       await crawler.run(SITE.SONICGARDEN),
     ];
 
-    await appStore.regist(result);
-
-    // クローリング終了時刻を保存
-    await appStore.updateBatchHistory(batchHistoryId);
+    // 終了時刻を取得
+    const endAt = new Date();
+    // 取得したすべてのデータを詰め込む
+    const batchResult = {
+      crawlingResults,
+      batchHistory: {
+        startAt,
+        endAt,
+      },
+    } as BatchResult;
+    // 保存
+    const result = await appStore.regist(batchResult);
   };
 }
