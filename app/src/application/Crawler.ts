@@ -16,7 +16,7 @@ export class Crawler {
 
   run = async (siteId: SITE): Promise<CrawlerStats> => {
     const scraper = ScraperFactory.get(siteId);
-    const domain = new ArticleDomain(this.store, siteId);
+    const domain = new ArticleDomain(this.store, siteId, this.batchHistoryId);
     const handleFactory = new HandlerFactory(scraper, siteId, domain);
 
     const urls = SITES[siteId].urls;

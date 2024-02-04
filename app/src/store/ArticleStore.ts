@@ -1,6 +1,15 @@
 import { SITE } from '@/config.js';
-import { localNow } from '@/utils/time.js';
 import { AxiosInstance, AxiosResponse } from 'axios';
+
+export interface NewArticleRequest {
+  title: string;
+  siteId: number;
+  content: string;
+  contentHash: string;
+  url: string;
+  contentId: string;
+  batchHistoryId: number;
+}
 
 export interface NewArticle {
   title: string;
@@ -18,6 +27,7 @@ export interface Article {
   contentHash: string;
   published: boolean;
   siteId: number;
+  batchHistoryId: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,7 +37,7 @@ export class ArticleStore {
   constructor(client: AxiosInstance) {
     this.client = client;
   }
-  createArticle = async (data: NewArticle) => {
+  createArticle = async (data: NewArticleRequest) => {
     return await this.client.post('/article-writer', data);
   };
 
