@@ -1,12 +1,14 @@
+import { log } from 'crawlee';
 import { BatchEntry } from './application/BatchLauncher.js';
-import { applyConfig } from './config.js';
 import { http } from './utils/axios.js';
 import { logger } from './utils/logger.js';
 
-applyConfig();
+// ログレベル設定
+log.setLevel(log.LEVELS.INFO);
 
+// 巡回バッチ起動
 const batch = new BatchEntry(http);
 batch
-  .launch()
+  .crawl()
   .then(() => logger.info('クローリングが正常に終了しました'))
   .catch((e) => logger.error(`クローリング中にエラーが発生したため処理を終了しました ${e}`));

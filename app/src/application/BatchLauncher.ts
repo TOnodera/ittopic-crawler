@@ -9,13 +9,15 @@ export class BatchEntry {
   constructor(client: AxiosInstance) {
     this.client = client;
   }
-  launch = async (): Promise<void> => {
+  crawl = async (): Promise<void> => {
     const appStore = new AppStore(this.client);
     const crawler = new Crawler(appStore);
 
     // 開始時刻を取得
     const startAt = new Date();
 
+    // クローリング実行
+    // Promis.all([])でやりたいところだが、crawleeでまだ未対応(experimenttal)なのでやめとく
     const crawlingResults = [
       // await crawler.run(SITE.CLASSMETHOD),
       // await crawler.run(SITE.CYBOZUSHIKI),
@@ -34,7 +36,7 @@ export class BatchEntry {
         endAt,
       },
     } as BatchResult;
-    // 保存
-    const result = await appStore.regist(batchResult);
+    // APIに投げて保存
+    await appStore.regist(batchResult);
   };
 }

@@ -1,6 +1,3 @@
-import { log } from 'crawlee';
-import { Settings } from 'luxon';
-
 export interface Site {
   id: number;
   name: string;
@@ -42,9 +39,5 @@ export const SITES: { [key in SITE]: { id: SITE; name: string; urls: string[] } 
   },
 };
 
-export const applyConfig = () => {
-  Settings.defaultZone = process.env.TZ as string;
-  log.setLevel(log.LEVELS.INFO);
-};
-
+// axiosのリトライ回数
 export const HTTP_RETRY_COUNT = 3;
