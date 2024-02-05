@@ -22,7 +22,7 @@ RUN sed -i -e 's/# \(ja_JP.UTF-8\)/\1/' /etc/locale.gen \
     && locale-gen
 
 # ユーザー設定
-RUN npm i -g dotenv-cli tsc-alias
+RUN npm i -g dotenv-cli tsc-alias dotenv-cli
 ARG userid=1000
 RUN usermod -s /bin/bash -u ${userid} node
 WORKDIR /home/node/crawler/app
@@ -32,6 +32,7 @@ RUN chown -R ${userid}:${userid} /home/node/
 # 起動
 USER node
 RUN npm ci 
-CMD ["npm", "start"]
+#CMD ["npm", "start"]
+CMD ["sleep", "infinity"]
 
 
