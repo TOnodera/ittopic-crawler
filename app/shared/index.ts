@@ -1,6 +1,4 @@
-import { NewArticleRequest } from '@/store/AppStore';
-
-interface NewArticle {
+export interface NewArticle {
   title: string;
   siteId: number;
   content: string;
@@ -9,7 +7,7 @@ interface NewArticle {
   contentId: string;
 }
 
-interface Article {
+export interface Article {
   id: number;
   title: string;
   content: string;
@@ -20,14 +18,14 @@ interface Article {
   updatedAt: Date;
 }
 
-interface BatchHistory {
+export interface BatchHistory {
   startAt?: Date;
   endAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-interface CrawlerStats {
+export interface CrawlerStats {
   requestsFinished: number | null;
   requestsFailed: number | null;
   retryHistogram: number[];
@@ -41,30 +39,25 @@ interface CrawlerStats {
   siteId: SITE;
 }
 
-interface CrawlingResult {
+export interface CrawlingResult {
   siteId: SITE;
-  articles: NewArticleRequest[];
+  articles: NewArticle[];
   stats: CrawlerStats;
 }
 
-interface BatchResult {
+export interface BatchResult {
   crawlingResults: CrawlingResult[];
   batchHistory: BatchHistory;
 }
 
-interface BatchHistory {
+export interface BatchHistory {
   startAt?: Date;
   endAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-interface Site {
-  id: number;
-  name: string;
-}
-
-declare enum SITE {
+export enum SITE {
   QIITA = 1,
   CLASSMETHOD = 2,
   CYBOZUSHIKI = 3,

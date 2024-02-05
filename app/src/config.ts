@@ -1,8 +1,3 @@
-export interface Site {
-  id: number;
-  name: string;
-}
-
 export enum SITE {
   QIITA = 1 as number,
   CLASSMETHOD = 2,

@@ -27,6 +27,7 @@ export class ClassmethodScraper implements Scraper {
       contentHash: '',
       contentId,
       url,
+      ...ogpInfo,
     };
   }
   getSelector() {

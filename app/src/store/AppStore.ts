@@ -2,18 +2,6 @@ import { SITE } from '@/config.js';
 import { AxiosInstance, AxiosResponse } from 'axios';
 import { BatchHistory, BatchResult, CrawlingResult } from 'shared';
 
-export interface NewArticleRequest {
-  title: string;
-  siteId: number;
-  content: string;
-  contentHash: string;
-  url: string;
-  contentId: string;
-  ogpTitle: string | null;
-  ogpImage: string | null;
-  ogpDescription: string | null;
-}
-
 export interface CrawlerStats {
   requestsFinished: number | null;
   requestsFailed: number | null;
@@ -35,6 +23,9 @@ export interface NewArticle {
   contentHash: string;
   url: string;
   contentId: string;
+  ogpTitle: string | null;
+  ogpImage: string | null;
+  ogpDescription: string | null;
 }
 
 export interface Article {
@@ -51,7 +42,7 @@ export interface Article {
 
 export class AppStore {
   private client: AxiosInstance;
-  private buffer: NewArticleRequest[];
+  private buffer: NewArticle[];
   constructor(client: AxiosInstance) {
     this.client = client;
     this.buffer = [];
@@ -72,7 +63,7 @@ export class AppStore {
     return isError;
   }
 
-  pushBuff = async (data: NewArticleRequest) => {
+  pushBuff = async (data: NewArticle) => {
     this.buffer.push(data);
   };
 
