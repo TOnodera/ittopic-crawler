@@ -8,13 +8,15 @@
             "name": "Start Crawler",
             "request": "launch",
             "runtimeArgs": [
-                "start"
+                "run",
+                "dev"
             ],
             "cwd": "${workspaceFolder}/app",
             "runtimeExecutable": "npm",
             "skipFiles": [
                 "<node_internals>/**"
             ],
+            "envFile": "${workspaceFolder}/app/.env.development",
             "type": "node"
         },
         {

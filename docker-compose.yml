@@ -4,6 +4,7 @@ services:
     build: ./app
     volumes:
       - ./:/home/node/crawler
+    command: ["sleep", "infinity"]
 # 開発時はapi側で作ったネットワークを使うのでapi側のdocker-composeも起動しとく
 networks:
   default:
