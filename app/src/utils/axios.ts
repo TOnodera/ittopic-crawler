@@ -10,7 +10,6 @@ console.debug('baseURL: ', baseURL);
 console.debug('NODE_ENV:', process.env.NODE_ENV);
 const http = axios.create({
   baseURL,
-  httpAgent: new Agent({keepAlive: false})
 });
 
 axiosRetry(axios, { retries: HTTP_RETRY_COUNT });

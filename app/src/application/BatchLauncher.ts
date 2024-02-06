@@ -19,10 +19,10 @@ export class BatchEntry {
     // クローリング実行
     // Promis.all([])でやりたいところだが、crawleeでまだ未対応(experimenttal)なのでやめとく
     const crawlingResults = [
-      // await crawler.run(SITE.CLASSMETHOD),
-      // await crawler.run(SITE.CYBOZUSHIKI),
-      // await crawler.run(SITE.FREEE),
-      // await crawler.run(SITE.QIITA),
+      await crawler.run(SITE.CLASSMETHOD),
+      await crawler.run(SITE.CYBOZUSHIKI),
+      await crawler.run(SITE.FREEE),
+      await crawler.run(SITE.QIITA),
       await crawler.run(SITE.SONICGARDEN),
     ];
 
