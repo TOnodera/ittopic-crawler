@@ -31,7 +31,7 @@
     "start": "npm run build && node dist/src/main.js",
     "dev": "dotenv -e .env.development -- bash -c 'tsx src/main.ts'",
     "build": "rm -rf ./dist && tsc -p tsconfig.prod.json && tsc-alias -p tsconfig.prod.json",
-    "test": "jest --runInBand"
+    "test": "dotenv -e .env.test -- bash -c 'jest --runInBand'"
   },
   "author": "t.onodera",
   "license": "ISC"

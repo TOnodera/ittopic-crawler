@@ -19,12 +19,12 @@ class ArticleDomain {
   }
 
   /**
-   * ここでクローラで取得したそれぞれの記事データを保存する
+   * ここでクローラで取得したそれぞれの記事データを保存リストに入れる
    *
    * @param data
    * @returns
    */
-  async push(data: NewArticle): Promise<boolean> {
+  async addSaveList(data: NewArticle): Promise<boolean> {
     /**
      * データ登録部
      */
