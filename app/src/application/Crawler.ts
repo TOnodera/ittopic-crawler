@@ -14,14 +14,13 @@ export class Crawler {
   }
 
   run = async (siteId: SITE): Promise<CrawlingResult> => {
-    const ogp = new Ogp();
-    const factory = new ScraperFactory(ogp);
+    const factory = new ScraperFactory(new Ogp());
     const scraper = factory.get(siteId);
     const domain = new ArticleDomain(this.store, siteId);
-    const handleFactory = new HandlerFactory(scraper, siteId, domain);
+    const handlerFactory = new HandlerFactory(scraper, siteId, domain);
 
     const urls = SITES[siteId].urls;
-    const requestHandler = await handleFactory.get();
+    const requestHandler = await handlerFactory.get();
     const crawler = new CheerioCrawler({ requestHandler });
     const stats = await crawler.run(urls);
     const articles = this.store.getBuffAll();

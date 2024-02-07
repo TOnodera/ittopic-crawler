@@ -19,7 +19,7 @@ describe('ArticleDomainのテスト', () => {
     } as NewArticle;
     const store = new AppStore(http);
     const domain = new ArticleDomain(store, SITE.QIITA);
-    expect(domain.push(article)).toBeTruthy();
+    expect(domain.addSaveList(article)).toBeTruthy();
   });
   test('正常系 / OGP系のデータはundefinedを許容すること', () => {
     const article = {
@@ -35,6 +35,6 @@ describe('ArticleDomainのテスト', () => {
     } as NewArticle;
     const store = new AppStore(http);
     const domain = new ArticleDomain(store, SITE.QIITA);
-    expect(domain.push(article)).toBeTruthy();
+    expect(domain.addSaveList(article)).toBeTruthy();
   });
 });

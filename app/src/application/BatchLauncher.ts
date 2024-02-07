@@ -3,6 +3,7 @@ import { Crawler } from '@/application/Crawler.js';
 import { AxiosInstance } from 'axios';
 import { AppStore } from '@/store/AppStore';
 import { BatchResult } from 'shared';
+import { BatchTimer } from '@/utils/time';
 
 export class BatchEntry {
   private client: AxiosInstance;
@@ -12,9 +13,10 @@ export class BatchEntry {
   crawl = async (): Promise<void> => {
     const appStore = new AppStore(this.client);
     const crawler = new Crawler(appStore);
+    const batchTimer = new BatchTimer();
 
-    // 開始時刻を取得
-    const startAt = new Date();
+    // 時間計測開始
+    batchTimer.start();
 
     // クローリング実行
     // Promis.all([])でやりたいところだが、crawleeでまだ未対応(experimenttal)なのでやめとく
@@ -26,14 +28,13 @@ export class BatchEntry {
       await crawler.run(SITE.SONICGARDEN),
     ];
 
-    // 終了時刻を取得
-    const endAt = new Date();
+    // 時間計測終了
+    batchTimer.end();
     // 取得したすべてのデータを詰め込む
     const batchResult = {
       crawlingResults,
       batchHistory: {
-        startAt,
-        endAt,
+        ...batchTimer.getResult(),
       },
     } as BatchResult;
     // APIに投げて保存
