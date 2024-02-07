@@ -1,8 +1,7 @@
-FROM apify/actor-node:18
+FROM node:20
 
 USER root
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends \
+RUN  apt-get update && apt-get install -y --no-install-recommends \
   curl \
   wget \
   gnupg \

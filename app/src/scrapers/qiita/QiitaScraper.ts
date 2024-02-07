@@ -3,13 +3,14 @@ import { Request, Dictionary } from 'crawlee';
 import { Scraper } from '../Scraper.js';
 import { SITE } from '@/config.js';
 import { Ogp } from '@/utils/ogp.js';
+import { CheerioAPI } from 'cheerio';
 
 export class QiitaScraper implements Scraper {
   private ogp: Ogp;
   constructor(ogp: Ogp) {
     this.ogp = ogp;
   }
-  getPageData(request: Request<Dictionary>, $: cheerio.CheerioAPI, siteId: SITE): NewArticle {
+  getPageData(request: Request<Dictionary>, $: CheerioAPI, siteId: SITE): NewArticle {
     // データ取得部
     const title = $('title').text();
     const content = $('.style-itrjxe').first().text();
