@@ -1,4 +1,4 @@
-FROM apify/actor-node-playwright-chrome:18
+FROM apify/actor-node:18
 
 USER root
 RUN apt-get update \

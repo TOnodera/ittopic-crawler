@@ -23,9 +23,9 @@ export interface NewArticle {
   contentHash: string;
   url: string;
   contentId: string;
-  ogpTitle: string | null;
-  ogpImage: string | null;
-  ogpDescription: string | null;
+  ogpTitle: string | undefined;
+  ogpImage: string | undefined;
+  ogpDescription: string | undefined;
 }
 
 export interface Article {

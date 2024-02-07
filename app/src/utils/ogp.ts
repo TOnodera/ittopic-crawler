@@ -1,17 +1,13 @@
-import { Page } from 'playwright';
-
 export interface OgpInfo {
-  ogpTitle: string | null;
-  ogpImage: string | null;
-  ogpDescription: string | null;
+  ogpTitle: string | undefined;
+  ogpImage: string | undefined;
+  ogpDescription: string | undefined;
 }
 export class Ogp {
-  async get(page: Page): Promise<OgpInfo> {
-    const ogpTitle = await page.locator('meta[property="og:title"]').getAttribute('content');
-    const ogpImage = await page.locator('meta[property="og:image"]').getAttribute('content');
-    const ogpDescription = await page
-      .locator('meta[property="og:description"]')
-      .getAttribute('content');
+  get($: cheerio.CheerioAPI): OgpInfo {
+    const ogpTitle = $('meta[property="og:title"]').attr('content');
+    const ogpImage = $('meta[property="og:image"]').attr('content');
+    const ogpDescription = $('meta[property="og:description"]').attr('content');
     return {
       ogpTitle,
       ogpImage,

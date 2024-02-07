@@ -1,4 +1,4 @@
-import { PlaywrightCrawler } from 'crawlee';
+import { CheerioCrawler } from 'crawlee';
 import { SITES, SITE } from '@/config.js';
 import { AppStore } from '@/store/AppStore.js';
 import { HandlerFactory } from '../scrapers/HandlerFactory.js';
@@ -22,7 +22,7 @@ export class Crawler {
 
     const urls = SITES[siteId].urls;
     const requestHandler = await handleFactory.get();
-    const crawler = new PlaywrightCrawler({ requestHandler });
+    const crawler = new CheerioCrawler({ requestHandler });
     const stats = await crawler.run(urls);
     const articles = this.store.getBuffAll();
 

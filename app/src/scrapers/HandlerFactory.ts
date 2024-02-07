@@ -1,5 +1,5 @@
 import { Scraper } from './Scraper.js';
-import { createPlaywrightRouter } from 'crawlee';
+import { createCheerioRouter } from 'crawlee';
 import { SITE } from '@/config.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
 import { logger } from '@/utils/logger.js';
@@ -26,10 +26,10 @@ export class HandlerFactory {
   }
 
   get = async () => {
-    const requestHandler = createPlaywrightRouter();
+    const requestHandler = createCheerioRouter();
     // 詳細ページのハンドラ
-    requestHandler.addHandler('ARTICLE', async ({ request, page }): Promise<void> => {
-      const data = await this.scraper.getPageData(request, page, this.siteId);
+    requestHandler.addHandler('ARTICLE', async ({ $, request }): Promise<void> => {
+      const data = await this.scraper.getPageData(request, $, this.siteId);
       await this.domain.push(data);
     });
     // enqueueLinksのセレクタに一覧ページに表示されている取得したい記事のリンクのセレクタを入れる

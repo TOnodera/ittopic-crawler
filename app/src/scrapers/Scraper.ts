@@ -1,7 +1,6 @@
 import { SITE } from '@/config.js';
 import { NewArticle } from '@/store/AppStore';
 import { Request } from 'crawlee';
-import { Page } from 'playwright';
 
 export interface Scraper {
   /**
@@ -11,7 +10,7 @@ export interface Scraper {
    * @param page
    * @param siteId
    */
-  getPageData(request: Request, page: Page, siteId: SITE): Promise<NewArticle>;
+  getPageData(request: Request, $: cheerio.CheerioAPI, siteId: SITE): NewArticle;
 
   /**
    * 一覧ページから記事詳細ページを取得するためのcss selectorを返す
