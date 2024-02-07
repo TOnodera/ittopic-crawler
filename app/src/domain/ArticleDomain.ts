@@ -51,8 +51,6 @@ class ArticleDomain {
     }
     return true;
   }
-
-  regist = async () => {};
 }
 
 export { ArticleDomain };

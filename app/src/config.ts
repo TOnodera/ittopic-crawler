@@ -34,5 +34,6 @@ export const SITES: { [key in SITE]: { id: SITE; name: string; urls: string[] } 
   },
 };
 
+export const PRIVATE_TOKEN: string = process.env.PRIVATE_TOKEN as string;
 // axiosのリトライ回数
 export const HTTP_RETRY_COUNT = 3;
