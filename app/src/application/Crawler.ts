@@ -1,5 +1,5 @@
 import { CheerioCrawler } from 'crawlee';
-import { SITES, SITE } from '@/config.js';
+import { SITES, SITE, config, MIN_CONCURRENCY, MAX_CONCURRENCY } from '@/config.js';
 import { AppStore } from '@/store/AppStore.js';
 import { HandlerFactory } from '../scrapers/HandlerFactory.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
@@ -21,7 +21,10 @@ export class Crawler {
 
     const urls = SITES[siteId].urls;
     const requestHandler = await handlerFactory.get();
-    const crawler = new CheerioCrawler({ requestHandler });
+    const crawler = new CheerioCrawler(
+      { requestHandler, minConcurrency: MIN_CONCURRENCY, maxConcurrency: MAX_CONCURRENCY },
+      config
+    );
     const stats = await crawler.run(urls);
     const articles = this.store.getBuffAll();
 

@@ -1,10 +1,6 @@
-import { log } from 'crawlee';
 import { BatchEntry } from './application/BatchLauncher.js';
 import { http } from './utils/axios.js';
 import { logger } from './utils/logger.js';
-
-// ログレベル設定
-log.setLevel(log.LEVELS.INFO);
 
 // 巡回バッチ起動
 const batch = new BatchEntry(http);

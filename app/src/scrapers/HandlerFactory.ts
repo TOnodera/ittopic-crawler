@@ -1,8 +1,7 @@
 import { Scraper } from './Scraper.js';
-import { createCheerioRouter } from 'crawlee';
-import { SITE } from '@/config.js';
+import { createCheerioRouter, sleep } from 'crawlee';
+import { REQUEST_INTERVAL, SITE } from '@/config.js';
 import { ArticleDomain } from '@/domain/ArticleDomain.js';
-import { logger } from '@/utils/logger.js';
 
 /**
  * crawleeに登録する詳細ページに入った後のハンドラをここで登録する
@@ -31,6 +30,7 @@ export class HandlerFactory {
     requestHandler.addHandler('ARTICLE', async ({ $, request }): Promise<void> => {
       const data = await this.scraper.getPageData(request, $, this.siteId);
       await this.domain.addSaveList(data);
+      await sleep(REQUEST_INTERVAL);
     });
     // enqueueLinksのセレクタに一覧ページに表示されている取得したい記事のリンクのセレクタを入れる
     requestHandler.addDefaultHandler(async ({ enqueueLinks }) => {
