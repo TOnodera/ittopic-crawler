@@ -24,7 +24,7 @@ export class BatchEntry {
       await crawler.run(SITE.CLASSMETHOD),
       await crawler.run(SITE.CYBOZUSHIKI),
       await crawler.run(SITE.FREEE),
-      await crawler.run(SITE.QIITA),
+      await crawler.run(SITE.SANSAN),
       await crawler.run(SITE.SONICGARDEN),
     ];
 

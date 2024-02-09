@@ -1,3 +1,5 @@
+import { SITE } from '@/config';
+
 export interface NewArticle {
   title: string;
   siteId: number;
@@ -55,12 +57,4 @@ export interface BatchHistory {
   endAt?: Date;
   createdAt?: Date;
   updatedAt?: Date;
-}
-
-export enum SITE {
-  QIITA = 1,
-  CLASSMETHOD = 2,
-  CYBOZUSHIKI = 3,
-  SONICGARDEN = 4,
-  FREEE = 5,
 }

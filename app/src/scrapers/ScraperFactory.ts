@@ -3,9 +3,9 @@ import { Scraper } from './Scraper.js';
 import { ClassmethodScraper } from './classmethod/ClassmethodScraper.js';
 import { CybozushikiScraper } from './cybozushiki/CybozushikiScraper.js';
 import { FreeeScraper } from './freee/FreeeScraper.js';
-import { QiitaScraper } from './qiita/QiitaScraper.js';
 import { SonicgardenScraper } from './sonicgarden/SonicgardenScraper.js';
 import { Ogp } from '@/utils/ogp.js';
+import { SansanScraper } from './sansan/SansanScraper.js';
 
 export class ScraperFactory {
   private ogp: Ogp;
@@ -20,10 +20,10 @@ export class ScraperFactory {
         return new CybozushikiScraper(this.ogp);
       case SITE.FREEE:
         return new FreeeScraper(this.ogp);
-      case SITE.QIITA:
-        return new QiitaScraper(this.ogp);
       case SITE.SONICGARDEN:
         return new SonicgardenScraper(this.ogp);
+      case SITE.SANSAN:
+        return new SansanScraper(this.ogp);
     }
   }
 }

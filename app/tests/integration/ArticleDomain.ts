@@ -12,13 +12,13 @@ describe('ArticleDomainのテスト', () => {
       contentHash: 'content_hash',
       contentId: 'contentId',
       url: 'https://example.com',
-      siteId: SITE.QIITA,
+      siteId: SITE.SANSAN,
       ogpTitle: 'ogpTitle',
       ogpDescription: 'ogpDesc',
       ogpImage: 'ogpImage',
     } as NewArticle;
     const store = new AppStore(http);
-    const domain = new ArticleDomain(store, SITE.QIITA);
+    const domain = new ArticleDomain(store, SITE.SANSAN);
     expect(domain.addSaveList(article)).toBeTruthy();
   });
   test('正常系 / OGP系のデータはundefinedを許容すること', () => {
@@ -28,13 +28,13 @@ describe('ArticleDomainのテスト', () => {
       contentHash: 'content_hash',
       contentId: 'contentId',
       url: 'https://example.com',
-      siteId: SITE.QIITA,
+      siteId: SITE.SANSAN,
       ogpTitle: undefined,
       ogpDescription: undefined,
       ogpImage: undefined,
     } as NewArticle;
     const store = new AppStore(http);
-    const domain = new ArticleDomain(store, SITE.QIITA);
+    const domain = new ArticleDomain(store, SITE.SANSAN);
     expect(domain.addSaveList(article)).toBeTruthy();
   });
 });

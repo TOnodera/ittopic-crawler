@@ -1,19 +1,14 @@
 import { Configuration } from 'crawlee';
 
 export enum SITE {
-  QIITA = 1 as number,
-  CLASSMETHOD = 2,
-  CYBOZUSHIKI = 3,
-  SONICGARDEN = 4,
-  FREEE = 5,
+  CLASSMETHOD = 10 as number,
+  CYBOZUSHIKI = 20,
+  SONICGARDEN = 30,
+  FREEE = 40,
+  SANSAN = 50,
 }
 
 export const SITES: { [key in SITE]: { id: SITE; name: string; urls: string[] } } = {
-  [SITE.QIITA]: {
-    id: SITE.QIITA,
-    name: SITE[SITE.QIITA],
-    urls: ['https://qiita.com/'],
-  },
   [SITE.CLASSMETHOD]: {
     id: SITE.CLASSMETHOD,
     name: SITE[SITE.CLASSMETHOD],
@@ -33,6 +28,11 @@ export const SITES: { [key in SITE]: { id: SITE; name: string; urls: string[] } 
     id: SITE.FREEE,
     name: SITE[SITE.FREEE],
     urls: ['https://developers.freee.co.jp/'],
+  },
+  [SITE.SANSAN]: {
+    id: SITE.SANSAN,
+    name: SITE[SITE.SANSAN],
+    urls: ['https://buildersbox.corp-sansan.com/'],
   },
 };
 
