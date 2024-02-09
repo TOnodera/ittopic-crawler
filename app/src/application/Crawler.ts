@@ -22,7 +22,11 @@ export class Crawler {
     const urls = SITES[siteId].urls;
     const requestHandler = await handlerFactory.get();
     const crawler = new CheerioCrawler(
-      { requestHandler, minConcurrency: MIN_CONCURRENCY, maxConcurrency: MAX_CONCURRENCY },
+      {
+        requestHandler,
+        minConcurrency: MIN_CONCURRENCY,
+        maxConcurrency: MAX_CONCURRENCY,
+      },
       config
     );
     const stats = await crawler.run(urls);

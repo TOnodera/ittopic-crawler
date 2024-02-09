@@ -26,6 +26,7 @@ export class BatchEntry {
       await crawler.run(SITE.FREEE),
       await crawler.run(SITE.SANSAN),
       await crawler.run(SITE.SONICGARDEN),
+      await crawler.run(SITE.MERCARI),
     ];
 
     // 時間計測終了
@@ -33,9 +34,7 @@ export class BatchEntry {
     // 取得したすべてのデータを詰め込む
     const batchResult = {
       crawlingResults,
-      batchHistory: {
-        ...batchTimer.getResult(),
-      },
+      batchHistory: batchTimer.getResult(),
     } as BatchResult;
     // APIに投げて保存
     await appStore.regist(batchResult);

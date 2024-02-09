@@ -6,6 +6,7 @@ import { FreeeScraper } from './freee/FreeeScraper.js';
 import { SonicgardenScraper } from './sonicgarden/SonicgardenScraper.js';
 import { Ogp } from '@/utils/ogp.js';
 import { SansanScraper } from './sansan/SansanScraper.js';
+import { MercariScraper } from './mercari/MercariScraper.js';
 
 export class ScraperFactory {
   private ogp: Ogp;
@@ -24,6 +25,8 @@ export class ScraperFactory {
         return new SonicgardenScraper(this.ogp);
       case SITE.SANSAN:
         return new SansanScraper(this.ogp);
+      case SITE.MERCARI:
+        return new MercariScraper(this.ogp);
     }
   }
 }
