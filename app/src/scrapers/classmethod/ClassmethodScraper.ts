@@ -15,7 +15,7 @@ export class ClassmethodScraper implements Scraper {
     const title = $('title').text();
     const content = $('div.main > .content').first().text();
     const url = request.url;
-    const contentId = url.split('/').slice(-2)[0] as string;
+    const contentId = decodeURI(url.split('/').slice(-2)[0] as string);
     const ogpInfo = this.ogp.get($);
     return {
       title,
